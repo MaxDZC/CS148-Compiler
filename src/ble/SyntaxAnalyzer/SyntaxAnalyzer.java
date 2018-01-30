@@ -1,19 +1,8 @@
 package ble.SyntaxAnalyzer;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.io.File;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
-import java.io.FileReader;
-import java.io.BufferedReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 
 public class SyntaxAnalyzer {
     /* Syntax */
@@ -24,16 +13,16 @@ public class SyntaxAnalyzer {
     private final static String DATATYPES = DataTypes.getSyntax();
     public final static String VALIDATION = Validation.getValidation();
     private final static String FUNCTIONS = Functions.getFunctionRegex();
-    private final static String ARRAYS = Arrays.getArrayPattern();
-    private final static String CONDITIONAL = Conditions.getConditionPattern();
-    private final static String QUEUE_STACK = Queue_stack.getQueue() + "|" + Queue_stack.getStack();
+    public final static String ARRAYS = Arrays.getArrayPattern();
+    public final static String CONDITIONAL = Conditions.getConditionPattern();
+    public final static String QUEUE_STACK = Queue_stack.getQueue() + "|" + Queue_stack.getStack();
     private final static String SORTING = SortingAlgos.getSortAscending() + "|" + SortingAlgos.getSortDescending();
     private final static String CUSTOM_DT = CustomDatatypes.getCustomDataTypesRegex();
     private final static String NUMBERS = Numbers.getBinary() + "|" + Numbers.getDecimal() + "|" + Numbers.getHexadecimal() + "|" + Numbers.getOctal();
     private final static String TRIGO = TrigoFunctions.getTrigoFunctions();
     private final static String FILES = FilesRegex.getFilesRegex();
-    private final static String TIME_LIB = TimeLibrary.getTimeSyntax();
-    private final static String DB = DatabaseRegex.getDatabaseRegex();
+    public final static String TIME_LIB = TimeLibrary.getTimeSyntax();
+    public final static String DB = DatabaseRegex.getDatabaseRegex();
     
     private final static String BODY = "("+COOKIES+"|"+SESSIONS+"|"+FETCH+"|"+DISPLAY+"|"+DATATYPES+"|"+VALIDATION+
             "|"+FUNCTIONS+"|"+ARRAYS+"|"+CONDITIONAL+"|"+QUEUE_STACK+"|"+SORTING+"|"+CUSTOM_DT+
