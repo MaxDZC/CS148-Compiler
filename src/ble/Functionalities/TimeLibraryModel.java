@@ -123,4 +123,7 @@ public class TimeLibraryModel {
         interval-=1;
         return true;
     }
+    public static TimeLibraryModel getTimeVariable(){
+        return new TimeLibraryModel();
+    }
 }
