@@ -5,6 +5,7 @@
  */
 package ble.Functionalities;
 
+import static ble.SyntaxAnalyzer.DeclaringAndAssigning.checkDeclarationStatement;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Stack;
@@ -28,6 +29,7 @@ public class Stack1 {
 		//for(int i = 0; i < lineSt.length; i++){
 			if(lineSt.matches(pat_stack)){
 				if(lineSt.contains("stack()") == true){
+					checkDeclarationStatement(lineSt,"");
 					st = stack(st);
 				}else if(lineSt.contains("push") == true){
 					System.out.println("Push Stack:");

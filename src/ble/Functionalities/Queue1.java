@@ -1,5 +1,6 @@
 package ble.Functionalities;
 
+import static ble.SyntaxAnalyzer.DeclaringAndAssigning.checkDeclarationStatement;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.regex.Matcher;
@@ -23,6 +24,7 @@ public class Queue1 {
 			if(lineQ.matches(pat_queue)){
 				if(lineQ.contains("queue()") == true){
 					System.out.println("Initialize Queue");
+					checkDeclarationStatement(lineQ,"");
 					qu = queue(qu);
 				}else if(lineQ.contains("enqueue") == true){
 					System.out.println("Enqueue Queue");
