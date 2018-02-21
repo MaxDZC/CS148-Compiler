@@ -50,7 +50,7 @@ public class BleDriver {
         results[0] = "varX = 10";
         results[1] = "varY = 20";
         
-        //Assume files come from http request...
+        //Assume files come from http request or socket...
         int ctr = 80;
         for (File file : CONSTANT_LISTOFFILES) {
                 if (file.isFile()) {
