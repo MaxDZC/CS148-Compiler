@@ -1,4 +1,4 @@
-package injector;
+package ble.injector;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -13,7 +13,7 @@ public class ImbedHtml {
 	private String results[];
 	
 	//Catches BLE tags...
-	private static final String extractTag = "(\\<\\@BLE)([^\\<\\@BLE\\@\\>]*)(\\@\\>)";
+	private static final String EXTRACTTAG = "(\\<\\@BLE)([^\\<\\@BLE\\@\\>]*)(\\@\\>)";
 	
 	public ImbedHtml(String htmlCode, String[] results){
 		//sample input...
@@ -39,10 +39,10 @@ public class ImbedHtml {
 	}
 	
 	public void imbedResults(){
-		Pattern pattern = Pattern.compile(ImbedHtml.extractTag);
+		Pattern pattern = Pattern.compile(ImbedHtml.EXTRACTTAG);
 		Matcher matcher = pattern.matcher(this.htmlCode);
 		
-		ArrayList<String> contents = new ArrayList<String>();
+		ArrayList<String> contents = new ArrayList<>();
 		while(matcher.find()){
 			contents.add(matcher.group(0));
 		}
