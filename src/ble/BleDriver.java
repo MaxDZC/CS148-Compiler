@@ -19,6 +19,7 @@ public class BleDriver {
     //Temporary for reading every .ble file for http upload to browser
     private static final File CONSTANT_FOLDER = new File("bledocs/");
     private static final File[] CONSTANT_LISTOFFILES = CONSTANT_FOLDER.listFiles();
+    private static final BleExtractor extractor = new BleExtractor();
     
     public static void main(String[] args) throws IOException, ScriptException, Exception {
         String bleCode, temp;
@@ -44,6 +45,10 @@ public class BleDriver {
             System.out.println("Syntax Error");
         }
         */
+        
+        // Testing of extractor in BLE
+        File testFile = new File("public/hello.ble");
+        System.out.println("FILE EXTRACTED NAME: "+extractor.extractBle(testFile));
         
         //Assume output processed from special task no. 2...
         String[] results = new String[2];

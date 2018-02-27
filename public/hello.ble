@@ -1,0 +1,11 @@
+<html>
+	<?ble>
+		print "Hello"
+		let x = 10
+		x = x + 3
+	<ble?>
+	
+	<body>
+		<h1>Some text here</h2>
+	</body>
+</html>
