@@ -4,13 +4,13 @@
 		<title>Test</title>
 	</head>
 	<body>
-<h1>cm guapo</h1>
-		<@BLE
 
-			Let varX = 10
-			Let varY = 20
+		<ble?>
 
-		@>
+			let varX = 10
+			let varY = 20
+
+		<?ble>
 		<h1>Select 10 or 20</h1>
 
 		<select>
