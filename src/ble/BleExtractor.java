@@ -28,14 +28,17 @@ public class BleExtractor {
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		
 		while((text = reader.readLine()) != null) {
-			temp += text;
+			temp += text.trim();
+			temp += "\n";
 		}
+		
 		
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(temp);
 		String filename = file.getName();
 		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(CONSTANT_FOLDER+"extracted_"+filename));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(new File("bledocs/extracted_"+filename)));
+		m.find();
 		writer.write(m.group());
 		
 		writer.close();

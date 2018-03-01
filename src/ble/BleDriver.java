@@ -1,5 +1,6 @@
 package ble;
 
+
 import ble.Http.Server;
 import ble.SyntaxAnalyzer.*;
 import ble.injector.ImbedHtml;
@@ -14,8 +15,11 @@ import javax.script.ScriptException;
  *
  * @author Max
  */
+
+
 public class BleDriver {
-    static SyntaxAnalyzer sa = new SyntaxAnalyzer();
+
+	static SyntaxAnalyzer sa = new SyntaxAnalyzer();
     //Temporary for reading every .ble file for http upload to browser
     private static final File CONSTANT_FOLDER = new File("bledocs/");
     private static final File[] CONSTANT_LISTOFFILES = CONSTANT_FOLDER.listFiles();
@@ -76,5 +80,5 @@ public class BleDriver {
                 }
         }
     }
-    
+
 }
