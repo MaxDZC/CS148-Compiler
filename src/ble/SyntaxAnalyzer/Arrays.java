@@ -6,6 +6,6 @@ package ble.SyntaxAnalyzer;
  */
 public class Arrays {
     public static String getArrayPattern(){
-        return "let\\\\s*[a-zA-z]*(\\\\s*)?=(\\\\s*)?Array\\\\(\\\\)";
+        return "let\\s*[a-zA-z]*(\\s*)?=(\\s*)?Array\\(\\)";
     }
 }

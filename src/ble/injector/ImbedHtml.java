@@ -13,7 +13,7 @@ public class ImbedHtml {
 	private String results[];
 	
 	//Catches BLE tags...
-	private static final String EXTRACTTAG = "(\\<\\@BLE)([^\\<\\@BLE\\@\\>]*)(\\@\\>)";
+	private static final String EXTRACTTAG = "(\\<@BLE)([^\\<\\@BLE\\@\\>]*)(@\\>)";
 	
 	public ImbedHtml(String htmlCode, String[] results){
 		//sample input...
@@ -68,5 +68,9 @@ public class ImbedHtml {
 				}
 			}
 		}
+		
+		this.htmlCode = this.htmlCode.replaceAll("(?<=(<@BLE))(\\w|\\d|\\n|[().,\\-:;@#$%^&*\\[\\]\"'+–/\\/®°°!?{}|`~=]|\\t|\\s)+?(?=(@>))", "");
+		this.htmlCode = this.htmlCode.replaceAll("<@BLE","");
+		this.htmlCode = this.htmlCode.replaceAll("@>", "");
 	}
 }

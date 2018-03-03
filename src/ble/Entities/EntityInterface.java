@@ -1,10 +1,10 @@
-package ble.Entities;
+package ble.entities;
 
 public interface EntityInterface {
 	public String getName();
 	public void setName(String name);
-	public String getValue();
-	public void setValue(String value);
+	public Object getValue();
+	public void setValue(Object value);
 	public String getScope();
 	public void setScope(String scope);
 }

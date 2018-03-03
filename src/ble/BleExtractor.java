@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  *
  */
 public class BleExtractor {
-	private final String regex = "(?<=(<\\?ble>))(\\w|\\d|\\n|[().,\\-:;@#$%^&*\\[\\]\"'+–/\\/®°°!?{}|`~=]|\\t|\\s)+?(?=(<ble\\?>))";
+	private final String regex = "(?<=(<@BLE))(\\w|\\d|\\n|[().,\\-:;@#$%^&*\\[\\]\"'+–/\\/®°°!?{}|`~=]|\\t|\\s)+?(?=(@>))";
 	private static final File CONSTANT_FOLDER = new File("bledocs/");
 	
 	public BleExtractor() {
@@ -37,9 +37,11 @@ public class BleExtractor {
 		Matcher m = p.matcher(temp);
 		String filename = file.getName();
 		
+		
 		BufferedWriter writer = new BufferedWriter(new FileWriter(new File("bledocs/extracted_"+filename)));
 		m.find();
 		writer.write(m.group());
+		System.out.println(m.group());
 		
 		writer.close();
 		reader.close();

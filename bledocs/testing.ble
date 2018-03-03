@@ -1,22 +1,9 @@
-<!DOCTYPE html>
 <html>
-	<head>
-		<title>Test</title>
-	</head>
+	<@BLE
+		// THIS IS A COMMENT
+		var arr = Array()
+	@>
 	<body>
-
-		<@BLE
-
-			Let varX = 10
-			Let varY = 20
-
-		@>
-		<h1>Select 10 or 20</h1>
-
-		<select>
-			<option value=<@BLE varX @>>10</option>
-			<option value=<@BLE varY @>>20</option>
-		</select>
-
+		<p1>HELLO!!</p1>
 	</body>
 </html>

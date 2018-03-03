@@ -1,4 +1,4 @@
-package ble.Entities;
+package ble.entities;
 
 public class EntityConstant extends Entity {
 	

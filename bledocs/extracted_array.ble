@@ -1,0 +1,7 @@
+
+let arr = Array()
+
+arr.append(3)
+arr.append(5)
+print(arr[1])
+//hello

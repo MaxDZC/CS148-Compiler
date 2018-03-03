@@ -1,11 +1,11 @@
-package ble.Entities;
+package ble.entities;
 
 public abstract class Entity implements EntityInterface {
 	
 	// GLOBAL = null  , <FUNCTION_NAME> , <FUNCTION_NAME@IF@FOR>
 	protected String scope;
 	protected String name;
-	protected String value;
+	protected Object value;
 	
 	public String getName() {
 		return this.name;
@@ -15,11 +15,11 @@ public abstract class Entity implements EntityInterface {
 		this.name = name;
 	}
 	
-	public String getValue() {
+	public Object getValue() {
 		return this.value;
 	}
 	
-	public void setValue(String value) {
+	public void setValue(Object value) {
 		this.value = value;
 	}
 	

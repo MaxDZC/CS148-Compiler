@@ -2,9 +2,13 @@ package ble;
 
 
 import ble.Http.Server;
+import ble.Storage.BleStorage;
 import ble.SyntaxAnalyzer.*;
 import ble.injector.ImbedHtml;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -25,8 +29,14 @@ public class BleDriver {
     private static final File[] CONSTANT_LISTOFFILES = CONSTANT_FOLDER.listFiles();
     private static final BleExtractor extractor = new BleExtractor();
     
+    public BleDriver() {
+    }
+    
     public static void main(String[] args) throws IOException, ScriptException, Exception {
-        String bleCode, temp;
+    	BleStorage storage = new BleStorage();
+        BleSyntaxChecker syntax = new BleSyntaxChecker();
+        
+    	String bleCode, temp;
         String[] lines;
         int i;
        
@@ -51,8 +61,20 @@ public class BleDriver {
         */
         
         // Testing of extractor in BLE
-        File testFile = new File("public/hello.ble");
-        System.out.println("FILE EXTRACTED NAME: "+extractor.extractBle(testFile));
+        File testFile = new File("public/array.ble");
+        File evaluateFile = new File("bledocs/"+extractor.extractBle(testFile));
+        System.out.println("FILE EXTRACTED NAME: "+evaluateFile.getName());
+        
+        // Checks syntax of evaluate file
+        BufferedReader reader = new BufferedReader(new FileReader(evaluateFile));
+        String line = null;
+        while((line = reader.readLine()) != null) {
+        	if(syntax.syntaxCheck(line, storage)) {
+        		System.out.println("Syntax Correct");
+        	} else {
+        		System.err.println("Error Syntax");
+        	}
+        }
         
         //Assume output processed from special task no. 2...
         String[] results = new String[2];

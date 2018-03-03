@@ -1,4 +1,4 @@
-package ble.Entities;
+package ble.entities;
 
 public class EntityFunction extends Entity {
 	public EntityFunction(String name, String value, String scope) {
