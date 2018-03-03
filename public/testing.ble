@@ -1,17 +1,16 @@
+<!DOCTYPE html>
 <html>
-	<@BLE
-		// THIS IS A COMMENT
-		var arr = Array()
-	@>
+	<head>
+		<title>Test</title>
+	</head>
 	<body>
 
-	<h1>cm guapo</h1>
-		<@BLE
+		<ble?>
 
-			Let varX = 10
-			Let varY = 20
+			let varX = 10
+			let varY = 20
 
-		@>
+		<?ble>
 		<h1>Select 10 or 20</h1>
 
 		<select>
