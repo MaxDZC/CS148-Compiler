@@ -4,9 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import ble.objects.ArrayBle;
-import ble.Functionalities.ArraysFunct;
+import ble.Functionalities.*;
+import ble.SyntaxAnalyzer.*;
 import ble.Storage.BleStorage;
-import ble.SyntaxAnalyzer.Arrays;
 
 public class BleSyntaxChecker {
 	private Matcher m;
@@ -28,9 +28,28 @@ public class BleSyntaxChecker {
 			}
 		}
 		
+		//MDAS
+		p = Pattern.compile(MDAS.getMDASPattern());
+		m = p.matcher(line);
+		if(m.find() && !cond) {
+			MDASFunc.evaluateStatement(line, 0);
+		}
+		
+		//Display
+		if(DisplayRegex.checkPattern(line) && !cond) {
+			Display.checkPattern(line);
+		}
+		
+		//Validate
+		if(ValidationFunct.checkPattern(line) && !cond) {
+			ValidationFunct.run(line);
+		}
+		
+				
 		p = Pattern.compile("\\w*\\(.*\\)");
 		m = p.matcher(line);
 		System.out.println(line);
+		
 		if (m.find() && !cond) {			// checks if function
 			ArraysFunct arrFunction = new ArraysFunct();
 			
