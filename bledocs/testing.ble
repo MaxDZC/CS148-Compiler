@@ -4,20 +4,6 @@
 		var arr = Array()
 	@>
 	<body>
-
-	<h1>cm guapo</h1>
-		<@BLE
-
-			Let varX = 10
-			Let varY = 20
-
-		@>
-		<h1>Select 10 or 20</h1>
-
-		<select>
-			<option value=<@BLE varX @>>10</option>
-			<option value=<@BLE varY @>>20</option>
-		</select>
-
+		<p1>HELLO!!</p1>
 	</body>
 </html>
