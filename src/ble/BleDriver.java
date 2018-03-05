@@ -1,6 +1,7 @@
 package ble;
 
 
+import ble.Functionalities.MDASFunc;
 import ble.Http.Server;
 import ble.Storage.BleStorage;
 import ble.SyntaxAnalyzer.*;
@@ -13,6 +14,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.script.ScriptException;
 
 /**
@@ -61,6 +64,7 @@ public class BleDriver {
         */
         
         // Testing of extractor in BLE
+        /*
         File testFile = new File("public/array.ble");
         File evaluateFile = new File("bledocs/"+extractor.extractBle(testFile));
         System.out.println("FILE EXTRACTED NAME: "+evaluateFile.getName());
@@ -75,11 +79,8 @@ public class BleDriver {
         		System.err.println("Error Syntax");
         	}
         }
-        
+        */
         //Assume output processed from special task no. 2...
-        String[] results = new String[2];
-        results[0] = "varX = 10";
-        results[1] = "varY = 20";
         
         //Assume files come from http request or socket...
         int ctr = 80;
@@ -87,6 +88,15 @@ public class BleDriver {
                 if (file.isFile()) {
                     System.out.println("...Preparing files for browser upload");
                     bleCode = new String(Files.readAllBytes(Paths.get("bledocs/"+file.getName())), StandardCharsets.UTF_8);
+                    
+                    String result =extractor.extractBle(file);
+                    
+                    result = result.replaceAll("[a-zA-Z]", "");
+                    result = result.replaceAll("\\s*=\\s*", "");
+                    
+                    String[] results = new String[1];
+                    
+                    results[0] = "varX = "+" "+MDASFunc.evalExp(result);
                     ImbedHtml injectResult = new ImbedHtml(bleCode, results);
                     Server server = new Server();
                     

@@ -29,10 +29,8 @@ public class BleSyntaxChecker {
 		}
 		
 		//MDAS
-		p = Pattern.compile(MDAS.getMDASPattern());
-		m = p.matcher(line);
-		if(m.find() && !cond) {
-			MDASFunc.evaluateStatement(line, 0);
+		if(MDAS.checkPattern(line)) {
+			MDASFunc.evalExp(line);
 		}
 		
 		//Display

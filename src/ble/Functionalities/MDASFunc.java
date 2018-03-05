@@ -110,7 +110,7 @@ public class MDASFunc {
 	
 	public static Double evalExp(String expression){
 		assert expression != null;
-		assert MDASFunc.checkPattern(expression) == true;
+		//assert MDASFunc.checkPattern(expression) == true;
 		
 		return MDASFunc.evaluateStatement(expression, 0);
 	}
