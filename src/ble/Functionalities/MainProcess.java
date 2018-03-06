@@ -4,6 +4,7 @@ import ble.SyntaxAnalyzer.Data;
 import ble.SyntaxAnalyzer.Queue_stack;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.ARRAYS;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.CONDITIONAL;
+import static ble.SyntaxAnalyzer.SyntaxAnalyzer.CUSTOM_DT;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.COOKIES;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.DB;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.DISPLAY;
@@ -14,6 +15,8 @@ import static ble.SyntaxAnalyzer.SyntaxAnalyzer.VALIDATION;
 import java.io.IOException;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.script.ScriptException;
@@ -28,9 +31,10 @@ public class MainProcess {
     static Queue<Integer> qu;
     static Stack<Integer> st;
     
-    public static String process(String line, ble.SyntaxAnalyzer.DataTypes data) throws ScriptException, IOException {
+    public static String process(String line, ble.SyntaxAnalyzer.DataTypes data) throws ScriptException, IOException, Exception {
         String status;
-
+        CustomDataTypes X = new CustomDataTypes();
+        
         status = "Ok";
         
         p = Pattern.compile(REPEAT);
@@ -45,6 +49,19 @@ public class MainProcess {
         
         if(m.find()) {
             Loops.forLoop(line);
+        }
+        
+        p = Pattern.compile(CUSTOM_DT);
+        m = p.matcher(line);
+        
+        boolean stats = true;
+        if(m.find()) {
+            stats = X.run(line);
+            if(stats == true){
+                status = "Ok - Structure";
+            }else if(stats == false){
+                status = "Fail - Structure";
+            }
         }
 
         p = Pattern.compile(COOKIES);

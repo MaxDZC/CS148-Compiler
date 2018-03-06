@@ -6,10 +6,13 @@
 	<body>
 
 		<@BLE
+			design user
+				let x
+			
 			let varX = 10
 			let varY = 1
 			let arr = Array()
-
+			let varW = 7
 		@>
 		<h1>Select 10 or 20</h1>
 

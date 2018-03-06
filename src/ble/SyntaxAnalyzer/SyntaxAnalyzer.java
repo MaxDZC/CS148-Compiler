@@ -17,7 +17,7 @@ public class SyntaxAnalyzer {
     public final static String CONDITIONAL = Conditions.getConditionPattern();
     public final static String QUEUE_STACK = Queue_stack.getQueue() + "|" + Queue_stack.getStack();
     private final static String SORTING = SortingAlgos.getSortAscending() + "|" + SortingAlgos.getSortDescending();
-    private final static String CUSTOM_DT = CustomDatatypes.getCustomDataTypesRegex();
+    public final static String CUSTOM_DT = CustomDatatypes.getCustomDataTypesRegex();
     private final static String NUMBERS = Numbers.getBinary() + "|" + Numbers.getDecimal() + "|" + Numbers.getHexadecimal() + "|" + Numbers.getOctal();
     private final static String TRIGO = TrigoFunctions.getTrigoFunctions();
     private final static String FILES = FilesRegex.getFilesRegex();
