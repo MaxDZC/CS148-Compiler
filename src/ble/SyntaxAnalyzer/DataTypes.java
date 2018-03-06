@@ -51,6 +51,8 @@ public class DataTypes {
         syntax = "(\\s*let\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
         syntax += "|\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*)\"|-?\\d+(\\.?\\d+|))+\\s*[\r\n]";
         syntax += "|\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*\")|([+-]?([0-9]*[.])?[0-9]+))\\s*[\r\n])";
+        
+        System.out.println(syntax);
     
         return syntax;
     }

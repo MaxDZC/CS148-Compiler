@@ -79,20 +79,22 @@ public class BleDriver {
                 if (file.isFile()) {
                     System.out.println("...Preparing files for browser upload");
                     bleCode = new String(Files.readAllBytes(Paths.get("bledocs/"+file.getName())), StandardCharsets.UTF_8);
-                    
+                    String[] results = new String[2000];
                     String result = extractor.extractBle(file);
+                    
+                    System.out.println(result);
                     
                     if(syn.analyze(result)) {
                         String[] lines1 = result.split("\n");
                         for (String line : lines1) {
-                        	String[] results = new String[1];
+                        	results = new String[1];
                         	status = mp.process(line, data);
                         	System.out.println(status);
                         }
-	                    results[0] = "varX = "+" "+MDASFunc.evalExp(result);
+	                    //results[0] = "varX = "+" "+MDASFunc.evalExp(result);
 	                    
 	                    
-	                    
+                            
 	                    ImbedHtml injectResult = new ImbedHtml(bleCode, results);
 	                    Server server = new Server();
 	                    

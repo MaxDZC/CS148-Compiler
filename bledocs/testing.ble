@@ -7,7 +7,7 @@
 
 		<@BLE
 
-			let varX = 10 + 20;
+			let varX = 10
 
 		@>
 		<h1>Select 10 or 20</h1>
