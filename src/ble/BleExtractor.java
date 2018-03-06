@@ -33,18 +33,12 @@ public class BleExtractor {
 		
 		
 		Pattern p = Pattern.compile(regex);
+		
 		Matcher m = p.matcher(temp);
-		String filename = file.getName();
 		
-		
-		BufferedWriter writer = new BufferedWriter(new FileWriter(new File("bledocs/"+filename)));
 		m.find();
-		writer.write(m.group());
-		System.out.println(m.group());
 		
-		writer.close();
-		reader.close();
 		
-		return filename;
+		return m.group();
 	}
 }

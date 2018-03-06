@@ -75,6 +75,7 @@ public class BleDriver {
         //Assume files come from http request or socket...
         int ctr = 80;
         String status;
+        
         for (File file : CONSTANT_LISTOFFILES) {
                 if (file.isFile()) {
                     System.out.println("...Preparing files for browser upload");
