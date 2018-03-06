@@ -1,6 +1,6 @@
 package ble;
 
-import ble.Http.Server;
+// import ble.Http.Server;
 import ble.SyntaxAnalyzer.*;
 import ble.injector.ImbedHtml;
 import java.io.File;
@@ -10,17 +10,36 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import javax.script.ScriptException;
 
+import Ble.Network.Network;
+import Ble.Network.Http.Server;
+
 /**
  *
  * @author Max
  */
 public class BleDriver {
+    
+    protected Network network = null;
+    
     static SyntaxAnalyzer sa = new SyntaxAnalyzer();
     //Temporary for reading every .ble file for http upload to browser
     private static final File CONSTANT_FOLDER = new File("bledocs/");
     private static final File[] CONSTANT_LISTOFFILES = CONSTANT_FOLDER.listFiles();
     
+    
+    
     public static void main(String[] args) throws IOException, ScriptException, Exception {
+        BleDriver driver = new BleDriver();
+        
+           Server server = null;
+        
+        server = driver.network().createServer(8080);
+        server.start();
+        
+        server = driver.network().createServer(9999);
+        server.start();
+        
+        
         String bleCode, temp;
         String[] lines;
         int i;
@@ -50,8 +69,11 @@ public class BleDriver {
         results[0] = "varX = 10";
         results[1] = "varY = 20";
         
+        
+        return;
+        
         //Assume files come from http request or socket...
-        int ctr = 80;
+        /* int ctr = 8080;
         for (File file : CONSTANT_LISTOFFILES) {
                 if (file.isFile()) {
                     System.out.println("...Preparing files for browser upload");
@@ -69,7 +91,14 @@ public class BleDriver {
                     Server.server(null);
                     ctr++;
                 }
-        }
+        } */
     }
     
+    public BleDriver() {
+        this.network = new Network();
+    }
+    
+    public Network network() {
+        return this.network;
+    }
 }
