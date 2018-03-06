@@ -2,7 +2,7 @@ package ble.SyntaxAnalyzer;
 
 public class Data<T> {
 	private T value; 
-        private String scope;
+    private String scope;
 
     public String getScope() {
         return scope;

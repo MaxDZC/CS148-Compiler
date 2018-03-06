@@ -17,7 +17,7 @@ import ble.objects.ArrayBle;
  * @author Max
  */
 public class ArraysFunct {
-	private String f;									//holder for the function call
+	private static String f;									//holder for the function call
     static Pattern p;
     static Matcher m;
     
@@ -56,7 +56,7 @@ public class ArraysFunct {
 	 * @return any specified errors or value
 	 */
 	
-    public Object findFunction(Map<String,Entity> memory) {	
+    public static Object findFunction(Map<String,?> memory) {	
 		Object returnValue = null;					// object class that is used to return to the compiler
 		String pattern = "\\w*";					// regex to be used in order to get the desired function
 		String function;
@@ -135,7 +135,7 @@ public class ArraysFunct {
 	 * gets the parameters in the calling function
 	 * @return parameters of the function
 	 */
-	private String[] getParameters() {
+	private static String[] getParameters() {
 		String pattern = "\\(.*\\)";
 
 		String paramGroup;
@@ -156,7 +156,7 @@ public class ArraysFunct {
 	 * @param memory -> memory of the compiler
 	 * @return the index of the first occurrence of the value else returns -1
 	 */
-	private int search(String[] params, Map<String,?> memory) {
+	private static int search(String[] params, Map<String,?> memory) {
 		int i;
 		int returnValue = -1;
 		
@@ -178,7 +178,7 @@ public class ArraysFunct {
 	 * @param memory -> memory of compiler
 	 * @return the size of the array
 	 */
-	private Integer size(String[] params, Map<String,?> memory) {
+	private static Integer size(String[] params, Map<String,?> memory) {
 		ArrayBle array = (ArrayBle) memory.get(params[0]);
 
 		return array.size();
@@ -190,7 +190,7 @@ public class ArraysFunct {
 	 * @param memory -> memory of compiler
 	 * @return the class of the deleted object
 	 */
-	private Object delete(String[] params, Map<String,?> memory) {
+	private static Object delete(String[] params, Map<String,?> memory) {
 		Object returnValue;
 		
 		ArrayBle array = (ArrayBle) memory.get(params[0]);
@@ -210,7 +210,7 @@ public class ArraysFunct {
 	 * @param memory
 	 * @return
 	 */
-	private String append(String[] params, Map<String, ?> memory) {
+	private static String append(String[] params, Map<String, ?> memory) {
 		ArrayBle array = (ArrayBle) memory.get(params[0]);
 		
 		// TODO: check if the inserted value is a string, character or number
@@ -225,7 +225,7 @@ public class ArraysFunct {
 	 * @param memory
 	 * @return
 	 */
-	private String insert(String[] params, Map<String, ?> memory) {
+	private static String insert(String[] params, Map<String, ?> memory) {
 		String message = null;
 		
 		ArrayBle array =  (ArrayBle) memory.get(params[0]);
@@ -252,7 +252,7 @@ public class ArraysFunct {
 	 * @param memory
 	 * @return
 	 */
-	private Object retrieve(String[] params, Map<String, ?> memory) {
+	private static Object retrieve(String[] params, Map<String, ?> memory) {
 		
 		Object ret = null;
 		ArrayBle array = (ArrayBle) memory.get(params[0]);

@@ -12,10 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- * @author Max
- */
+
 public class DataTypes {
     public static Map<String, Data> allVars = new HashMap<String, Data>();
 

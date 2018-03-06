@@ -2,6 +2,7 @@ package ble;
 
 
 import ble.Functionalities.MDASFunc;
+import ble.Functionalities.MainProcess;
 import ble.Http.Server;
 import ble.Storage.BleStorage;
 import ble.SyntaxAnalyzer.*;
@@ -36,9 +37,10 @@ public class BleDriver {
     }
     
     public static void main(String[] args) throws IOException, ScriptException, Exception {
-    	BleStorage storage = new BleStorage();
-        BleSyntaxChecker syntax = new BleSyntaxChecker();
-        
+    	DataTypes data = new DataTypes();
+    	SyntaxAnalyzer syn = new SyntaxAnalyzer();
+    	MainProcess mp = new MainProcess();
+    	
     	String bleCode, temp;
         String[] lines;
         int i;
@@ -63,53 +65,49 @@ public class BleDriver {
         }
         */
         
-        // Testing of extractor in BLE
-        /*
         File testFile = new File("public/array.ble");
         File evaluateFile = new File("bledocs/"+extractor.extractBle(testFile));
         System.out.println("FILE EXTRACTED NAME: "+evaluateFile.getName());
         
-        // Checks syntax of evaluate file
-        BufferedReader reader = new BufferedReader(new FileReader(evaluateFile));
-        String line = null;
-        while((line = reader.readLine()) != null) {
-        	if(syntax.syntaxCheck(line, storage)) {
-        		System.out.println("Syntax Correct");
-        	} else {
-        		System.err.println("Error Syntax");
-        	}
-        }
-        */
+        
         //Assume output processed from special task no. 2...
         
         //Assume files come from http request or socket...
         int ctr = 80;
+        String status;
         for (File file : CONSTANT_LISTOFFILES) {
                 if (file.isFile()) {
                     System.out.println("...Preparing files for browser upload");
                     bleCode = new String(Files.readAllBytes(Paths.get("bledocs/"+file.getName())), StandardCharsets.UTF_8);
                     
-                    String result =extractor.extractBle(file);
+                    String result = extractor.extractBle(file);
                     
-                    result = result.replaceAll("[a-zA-Z]", "");
-                    result = result.replaceAll("\\s*=\\s*", "");
-                    
-                    String[] results = new String[1];
-                    
-                    results[0] = "varX = "+" "+MDASFunc.evalExp(result);
-                    ImbedHtml injectResult = new ImbedHtml(bleCode, results);
-                    Server server = new Server();
-                    
-                    System.out.println("File: "+file.getName());
-                    injectResult.imbedResults();
-                    server.setContext(file.getName());
-                    server.setResponse(injectResult.getHtmlCode());
-                    server.setSocketNo(ctr);
-                    System.out.println("Located at: localhost:"+server.getSocketNo()+server.getContext());
-                    
-                    Server.server(null);
-                    ctr++;
+                    if(syn.analyze(result)) {
+                        String[] lines1 = result.split("\n");
+                        for (String line : lines1) {
+                        	String[] results = new String[1];
+                        	status = mp.process(line, data);
+                        	System.out.println(status);
+                        }
+	                    results[0] = "varX = "+" "+MDASFunc.evalExp(result);
+	                    
+	                    
+	                    
+	                    ImbedHtml injectResult = new ImbedHtml(bleCode, results);
+	                    Server server = new Server();
+	                    
+	                    System.out.println("File: "+file.getName());
+	                    injectResult.imbedResults();
+	                    server.setContext(file.getName());
+	                    server.setResponse(injectResult.getHtmlCode());
+	                    server.setSocketNo(ctr);
+	                    System.out.println("Located at: localhost:"+server.getSocketNo()+server.getContext());
+	                    
+	                    Server.server(null);
+	                    ctr++;
+	                }
                 }
+        
         }
     }
 

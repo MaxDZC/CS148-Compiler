@@ -34,17 +34,17 @@ public class BleExtractor {
 		
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(temp);
-		//String filename = file.getName();
+		String filename = file.getName();
 		
 		
-		//BufferedWriter writer = new BufferedWriter(new FileWriter(new File("bledocs/extracted_"+filename)));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(new File("bledocs/"+filename)));
 		m.find();
-		//writer.write(m.group());
-		//System.out.println(m.group());
+		writer.write(m.group());
+		System.out.println(m.group());
 		
-		//writer.close();
+		writer.close();
 		reader.close();
 		
-		return m.group();
+		return filename;
 	}
 }

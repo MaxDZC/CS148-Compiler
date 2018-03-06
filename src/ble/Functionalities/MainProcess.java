@@ -1,5 +1,6 @@
 package ble.Functionalities;
 
+import ble.SyntaxAnalyzer.Data;
 import ble.SyntaxAnalyzer.Queue_stack;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.ARRAYS;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.CONDITIONAL;
@@ -27,9 +28,9 @@ public class MainProcess {
     static Queue<Integer> qu;
     static Stack<Integer> st;
     
-    public static String process(String line) throws ScriptException, IOException {
+    public static String process(String line, ble.SyntaxAnalyzer.DataTypes data) throws ScriptException, IOException {
         String status;
-        
+
         status = "Ok";
         
         p = Pattern.compile(REPEAT);
@@ -109,6 +110,7 @@ public class MainProcess {
         
         if(m.find()) {
             ArraysFunct.arrayStuff(line);
+            ArraysFunct.findFunction(data.allVars);
         }
         
         return status;
