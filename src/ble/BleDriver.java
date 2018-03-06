@@ -75,21 +75,23 @@ public class BleDriver {
         //Assume files come from http request or socket...
         int ctr = 80;
         String status;
+        
         for (File file : CONSTANT_LISTOFFILES) {
                 if (file.isFile()) {
                     System.out.println("...Preparing files for browser upload");
                     bleCode = new String(Files.readAllBytes(Paths.get("bledocs/"+file.getName())), StandardCharsets.UTF_8);
-                    
+                    System.out.println(file);
                     String result = extractor.extractBle(file);
-                    
+                    System.out.println(result);
                     if(syn.analyze(result)) {
                         String[] lines1 = result.split("\n");
                         for (String line : lines1) {
                         	String[] results = new String[1];
-                        	status = mp.process(line, data);
-                        	System.out.println(status);
+                        	mp.process(line, data);
+                        	System.out.println(data);
                         }
-	                    results[0] = "varX = "+" "+MDASFunc.evalExp(result);
+                        
+	                    /*results[0] = "varX = "+" "+MDASFunc.evalExp(result);
 	                    
 	                    
 	                    
@@ -103,7 +105,7 @@ public class BleDriver {
 	                    server.setSocketNo(ctr);
 	                    System.out.println("Located at: localhost:"+server.getSocketNo()+server.getContext());
 	                    
-	                    Server.server(null);
+	                    Server.server(null);*/
 	                    ctr++;
 	                }
                 }
