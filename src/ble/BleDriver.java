@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.script.ScriptException;
@@ -37,7 +38,7 @@ public class BleDriver {
     }
     
     public static void main(String[] args) throws IOException, ScriptException, Exception {
-    	DataTypes data = new DataTypes();
+    	ble.SyntaxAnalyzer.DataTypes data = new DataTypes();
     	SyntaxAnalyzer syn = new SyntaxAnalyzer();
     	MainProcess mp = new MainProcess();
     	
@@ -80,7 +81,8 @@ public class BleDriver {
                 if (file.isFile()) {
                     System.out.println("...Preparing files for browser upload");
                     bleCode = new String(Files.readAllBytes(Paths.get("bledocs/"+file.getName())), StandardCharsets.UTF_8);
-                    String[] results = new String[2000];
+                    ArrayList<String> resultGet = new ArrayList<>();
+                    String[] results;
                     String result = extractor.extractBle(file);
                     
                     System.out.println(result);
@@ -88,13 +90,15 @@ public class BleDriver {
                     if(syn.analyze(result)) {
                         String[] lines1 = result.split("\n");
                         for (String line : lines1) {
-                        	results = new String[1];
-                        	status = mp.process(line, data);
-                        	System.out.println(status);
+                                if(!line.trim().equals("")) {
+                                    resultGet.add(line);
+                                    status = MainProcess.process(line, data);
+                                    System.out.println(status);
+                                }
                         }
 	                    //results[0] = "varX = "+" "+MDASFunc.evalExp(result);
 	                    
-	                    
+                            results = resultGet.toArray(new String[0]);
                             
 	                    ImbedHtml injectResult = new ImbedHtml(bleCode, results);
 	                    Server server = new Server();

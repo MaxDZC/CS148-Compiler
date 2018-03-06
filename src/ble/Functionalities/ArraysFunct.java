@@ -31,8 +31,7 @@ public class ArraysFunct {
             p = Pattern.compile(patt);
             m = p.matcher(m.group());
             if(m.find()){
-                System.out.println(m.group());
-                
+                System.out.println(m.group());                
             }
             //System.out.println(m.find()?m.group():"None");
         }

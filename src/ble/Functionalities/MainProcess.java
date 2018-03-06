@@ -109,8 +109,8 @@ public class MainProcess {
         m = p.matcher(line);
         
         if(m.find()) {
-            ArraysFunct.arrayStuff(line);
-            ArraysFunct.findFunction(data.allVars);
+        //    ArraysFunct.arrayStuff(line);
+       //     ArraysFunct.findFunction(data.allVars);
         }
         
         return status;
