@@ -2,7 +2,7 @@ package ble;
 
 // import ble.Http.Server;
 import ble.SyntaxAnalyzer.*;
-import ble.injector.ImbedHtml;
+import ble.injector.Display;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -65,13 +65,19 @@ public class BleDriver {
         */
         
         //Assume output processed from special task no. 2...
-        String[] results = new String[2];
-        results[0] = "varX = 10";
-        results[1] = "varY = 20";
+        //Testing Display...
+        /*
+            bleCode = new String(Files.readAllBytes(Paths.get("bledocs/9999/testing.ble")), StandardCharsets.UTF_8);
+            String[] results = new String[2];
+            
+            results[0] = "varX = 10";
+            results[1] = "varY = 20";
         
-        
+            Display displaySample = new Display(bleCode, results);
+            displaySample.display();
+            
         return;
-        
+        */
         //Assume files come from http request or socket...
         /* int ctr = 8080;
         for (File file : CONSTANT_LISTOFFILES) {

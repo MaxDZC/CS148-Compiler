@@ -14,9 +14,9 @@
 		<h1>Select 10 or 20</h1>
 
 		<select>
-			<option value=<@BLE varX @>>10</option>
-			<option value=<@BLE varY @>>20</option>
+			<option value=<@BLE display(varX) @>>10</option>
+			<option value=<@BLE display(varY) @>>20</option>
 		</select>
-
+		<div><@BLE display(varX) @></div>
 	</body>
 </html>
