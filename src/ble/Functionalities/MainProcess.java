@@ -38,6 +38,8 @@ public class MainProcess {
 
         if(m.find()) {
             Loops.repeat(line);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on repeat loop function");
         }
         
         p = Pattern.compile(FORLOOP);
@@ -45,6 +47,8 @@ public class MainProcess {
         
         if(m.find()) {
             Loops.forLoop(line);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on for loop function");
         }
 
         p = Pattern.compile(COOKIES);
@@ -52,6 +56,8 @@ public class MainProcess {
 
         if(m.find()) {
             status = Cookies.cookies(line);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on cookies");
         }
         
         p = Pattern.compile(DISPLAY);
@@ -59,6 +65,8 @@ public class MainProcess {
         
         if(m.find()) {
             Display.run(line);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on display function");
         }
         
         p = Pattern.compile(VALIDATION);
@@ -66,6 +74,8 @@ public class MainProcess {
         
         if(m.find()) {
             ValidationFunct.run(line);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on validation");
         }
         
         p = Pattern.compile(CONDITIONAL);
@@ -74,6 +84,8 @@ public class MainProcess {
         if(m.find()) {
             Condi cond = new Condi();
             cond.evalStatement(line);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on conditional statements");
         }
         
         p = Pattern.compile(DB);
@@ -81,6 +93,8 @@ public class MainProcess {
         
         if(m.find()) {
             Database.test(line);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on database syntax");
         }
         
         p = Pattern.compile(TIME_LIB);
@@ -89,6 +103,8 @@ public class MainProcess {
         if(m.find()) {
             TimeLibraryModel t1 = new TimeLibraryModel();
             t1.checkTimeFunctionality(line);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on time library");
         }
         
         p = Pattern.compile(Queue_stack.getQueue());
@@ -96,13 +112,17 @@ public class MainProcess {
         
         if(m.find()) {
             Queue1.declareQueue(qu, line);
-        }  
+        }else if (!m.find()){
+            System.out.println("Syntax Error on queue functions");
+        }
         
         p = Pattern.compile(Queue_stack.getStack());
         m = p.matcher(line);
         
         if(m.find()) {
             Stack1.declareStack(st, line);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on stack functions");
         }
         
         p = Pattern.compile(ARRAYS);
