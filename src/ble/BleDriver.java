@@ -87,32 +87,35 @@ public class BleDriver {
                     
                     System.out.println(result);
                     
-                    if(syn.analyze(result)) {
+                    //if(syn.analyze(result)) {
                         String[] lines1 = result.split("\n");
                         for (String line : lines1) {
                                 if(!line.trim().equals("")) {
                                     resultGet.add(line);
                                     status = MainProcess.process(line, data);
                                     System.out.println(status);
+                                    System.out.println("checking");
                                 }
                         }
-	                    //results[0] = "varX = "+" "+MDASFunc.evalExp(result);
-	                    
-                            results = resultGet.toArray(new String[0]);
-                            
-	                    ImbedHtml injectResult = new ImbedHtml(bleCode, results);
-	                    Server server = new Server();
-	                    
-	                    System.out.println("File: "+file.getName());
-	                    injectResult.imbedResults();
-	                    server.setContext(file.getName());
-	                    server.setResponse(injectResult.getHtmlCode());
-	                    server.setSocketNo(ctr);
-	                    System.out.println("Located at: localhost:"+server.getSocketNo()+server.getContext());
-	                    
-	                    Server.server(null);
-	                    ctr++;
-	                }
+                        //results[0] = "varX = "+" "+MDASFunc.evalExp(result);
+
+                        results = resultGet.toArray(new String[0]);
+
+                        ImbedHtml injectResult = new ImbedHtml(bleCode, results);
+                        Server server = new Server();
+
+                        System.out.println("File: "+file.getName());
+                        injectResult.imbedResults();
+                        server.setContext(file.getName());
+                        server.setResponse(injectResult.getHtmlCode());
+                        server.setSocketNo(ctr);
+                        System.out.println("Located at: localhost:"+server.getSocketNo()+server.getContext());
+
+                        Server.server(null);
+                        ctr++;
+	            //}else{
+                    //    System.out.println("Syntax Error somewhere");
+                    //}
                 }
         
         }
