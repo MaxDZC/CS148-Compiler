@@ -97,6 +97,7 @@ public class BleDriver {
                                     System.out.println("checking");
                                 }
                         }
+<<<<<<< HEAD
                         //results[0] = "varX = "+" "+MDASFunc.evalExp(result);
 
                         results = resultGet.toArray(new String[0]);
@@ -116,6 +117,25 @@ public class BleDriver {
 	            //}else{
                     //    System.out.println("Syntax Error somewhere");
                     //}
+=======
+	                    //results[0] = "varX = "+" "+MDASFunc.evalExp(result);
+	                    
+                        results = resultGet.toArray(new String[0]);
+                            
+	                    ImbedHtml injectResult = new ImbedHtml(bleCode, results);
+	                    Server server = new Server();
+	                    
+	                    System.out.println("File: "+file.getName());
+	                    injectResult.imbedResults();
+	                    server.setContext(file.getName());
+	                    server.setResponse(injectResult.getHtmlCode());
+	                    server.setSocketNo(ctr);
+	                    System.out.println("Located at: localhost:"+server.getSocketNo()+server.getContext());
+	                    
+	                    Server.server(null);
+	                    ctr++;
+	                }
+>>>>>>> d181bc136c57724aa8ad32c523fa90b203b68c5b
                 }
         
         }
