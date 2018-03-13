@@ -98,7 +98,7 @@ public class BleDriver {
                         }
 	                    //results[0] = "varX = "+" "+MDASFunc.evalExp(result);
 	                    
-                            results = resultGet.toArray(new String[0]);
+                        results = resultGet.toArray(new String[0]);
                             
 	                    ImbedHtml injectResult = new ImbedHtml(bleCode, results);
 	                    Server server = new Server();
