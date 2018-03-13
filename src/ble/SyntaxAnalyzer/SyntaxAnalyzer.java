@@ -31,7 +31,7 @@ public class SyntaxAnalyzer {
     private final static String RELATIONAL = "(==|>=|<=|<|!=|>|&&|^|\\|\\|)";
     public final static String CONDITION = "(\\s*(\\w+|\\d+)\\s*"+RELATIONAL+"\\s*(\\w+||\\d+)\\s*)";
     
-    public final static String REPEAT = "repeat\\((\\d+|("+CONDITION+")+)\\)";
+    public final static String REPEAT = "repeat\\(( *\\d+ *|("+CONDITION+")+)\\)";
     public final static String FORLOOP = "for\\s*\\(\\s*\\w+\\sin\\s\\w+\\s*\\)";
     private final static String FUNCTION = "("+REPEAT+"|"+FORLOOP+")";
 

@@ -7,7 +7,7 @@ import ble.Http.Server;
 import ble.Storage.BleStorage;
 import ble.SyntaxAnalyzer.*;
 import ble.injector.ImbedHtml;
-
+import java.util.Arrays;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -89,12 +89,15 @@ public class BleDriver {
                     
                     if(syn.analyze(result)) {
                         String[] lines1 = result.split("\n");
-                        for (String line : lines1) {
-                                if(!line.trim().equals("")) {
-                                    resultGet.add(line);
-                                    status = MainProcess.process(line, data);
-                                    System.out.println(status);
-                                }
+                        for (int j = 0; j < lines1.length; j++) {
+
+
+
+                            if(!lines1[j].trim().equals("")) {
+                                resultGet.add(lines1[j]);
+                                status = MainProcess.process(lines1, j, data);
+                                System.out.println(status);
+                            }
                         }
 	                    //results[0] = "varX = "+" "+MDASFunc.evalExp(result);
 	                    

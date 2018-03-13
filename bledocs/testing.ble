@@ -10,6 +10,8 @@
 			let varY = 1
 			let arr = Array()
 
+			repeat( 12)
+				let varX = 2
 		@>
 		<h1>Select 10 or 20</h1>
 
