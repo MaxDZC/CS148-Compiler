@@ -87,7 +87,7 @@ public class BleDriver {
                     
                     System.out.println(result);
                     
-                    if(syn.analyze(result)) {
+                    //if(syn.analyze(result)) {
                         String[] lines1 = result.split("\n");
                         for (int j = 0; j < lines1.length; j++) {
 
@@ -99,23 +99,25 @@ public class BleDriver {
                                 System.out.println(status);
                             }
                         }
-	                    //results[0] = "varX = "+" "+MDASFunc.evalExp(result);
-	                    
+                        //results[0] = "varX = "+" "+MDASFunc.evalExp(result);
+
                         results = resultGet.toArray(new String[0]);
-                            
-	                    ImbedHtml injectResult = new ImbedHtml(bleCode, results);
-	                    Server server = new Server();
-	                    
-	                    System.out.println("File: "+file.getName());
-	                    injectResult.imbedResults();
-	                    server.setContext(file.getName());
-	                    server.setResponse(injectResult.getHtmlCode());
-	                    server.setSocketNo(ctr);
-	                    System.out.println("Located at: localhost:"+server.getSocketNo()+server.getContext());
-	                    
-	                    Server.server(null);
-	                    ctr++;
-	                }
+
+                        ImbedHtml injectResult = new ImbedHtml(bleCode, results);
+                        Server server = new Server();
+
+                        System.out.println("File: "+file.getName());
+                        injectResult.imbedResults();
+                        server.setContext(file.getName());
+                        server.setResponse(injectResult.getHtmlCode());
+                        server.setSocketNo(ctr);
+                        System.out.println("Located at: localhost:"+server.getSocketNo()+server.getContext());
+
+                        Server.server(null);
+                        ctr++;
+	            //}else{
+                    //    System.out.println("Syntax Error somewhere");
+                    //}
                 }
         
         }

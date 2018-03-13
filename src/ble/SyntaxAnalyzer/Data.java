@@ -1,21 +1,32 @@
 package ble.SyntaxAnalyzer;
 
 public class Data<T> {
-	private T value; 
-    private String scope;
 
-    public String getScope() {
-        return scope;
+    private T value; 
+    public static int currScope = 0;
+    private int varScope; 
+    
+    
+    public int getScope() 
+    {
+        return varScope;
     }
 
-    public void setScope(String scope) {
-        this.scope = scope;
+    public T getValue() {
+	return value;
     }
-	public T getValue() {
-		return value;
-	}
-	public void setValue(T value) {
-		this.value = value;
-	}
-	
-}    
+
+    public void setValue(T value) 
+    {
+        // value is "" if let va
+	this.value = value; 
+        this.varScope = this.currScope; 
+    }
+        
+    // ??? 
+    public static void outVarUndeclared(String varName){
+        System.out.println("Varible " + varName + " does not exist.");
+    }
+    
+
+}  

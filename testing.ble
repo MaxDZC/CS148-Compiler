@@ -6,17 +6,16 @@
 	<body>
 
 		<@BLE
-			let varX = 10
-			let varY = 1
-			let arr = 10
 
-			repeat( 12)
-				let varX = 2
+			Let varX = 10
+			Let varY = 20
+
 		@>
 		<h1>Select 10 or 20</h1>
 
 		<select>
-			<option value=<@BLE varX @>>30</option>
+			<option value=<@BLE varX @>>10</option>
+			<option value=<@BLE varY @>>20</option>
 		</select>
 
 	</body>
