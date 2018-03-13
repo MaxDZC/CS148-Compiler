@@ -25,7 +25,7 @@ public class Display {
 	        // If there are text captured from the syntax,
 	        if (m.find()) {	        	
 	        	String c = m.group(1);
-//	        	System.out.println(c + "\n\n"); // For "debugging" purpose: show the caught group of text
+	        	System.out.println(c + "\n\n"); // For "debugging" purpose: show the caught group of text
 	        	
 	        	// Parse the contents of the function's parameter and put its contents into an ArrayList
 	        	String[] temp = c.split("\\+\\s*");

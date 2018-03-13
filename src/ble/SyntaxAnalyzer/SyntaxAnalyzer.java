@@ -18,8 +18,8 @@ public class SyntaxAnalyzer {
     public final static String QUEUE_STACK = Queue_stack.getQueue() + "|" + Queue_stack.getStack();
     private final static String SORTING = SortingAlgos.getSortAscending() + "|" + SortingAlgos.getSortDescending();
     public final static String CUSTOM_DT = CustomDatatypes.getCustomDataTypesRegex();
-    private final static String NUMBERS = Numbers.getBinary() + "|" + Numbers.getDecimal() + "|" + Numbers.getHexadecimal() + "|" + Numbers.getOctal();
-    private final static String TRIGO = TrigoFunctions.getTrigoFunctions();
+    public final static String NUMBERS = Numbers.getBinary() + "|" + Numbers.getDecimal() + "|" + Numbers.getHexadecimal() + "|" + Numbers.getOctal();
+    public final static String TRIGO = TrigoFunctions.getTrigoFunctions();
     private final static String FILES = FilesRegex.getFilesRegex();
     public final static String TIME_LIB = TimeLibrary.getTimeSyntax();
     public final static String DB = DatabaseRegex.getDatabaseRegex();
@@ -47,7 +47,7 @@ public class SyntaxAnalyzer {
         
         pattern = Pattern.compile(CODE);
         matcher = pattern.matcher(bleCode);
-        
+        System.out.println(bleCode);
         return matcher.matches();
     }
     

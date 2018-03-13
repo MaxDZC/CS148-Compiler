@@ -6,11 +6,13 @@ import static ble.SyntaxAnalyzer.SyntaxAnalyzer.ARRAYS;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.CONDITIONAL;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.CUSTOM_DT;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.COOKIES;
+import static ble.SyntaxAnalyzer.SyntaxAnalyzer.NUMBERS;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.DB;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.DISPLAY;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.FORLOOP;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.REPEAT;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.TIME_LIB;
+import static ble.SyntaxAnalyzer.SyntaxAnalyzer.TRIGO;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.VALIDATION;
 import java.io.IOException;
 import java.util.Queue;
@@ -33,7 +35,6 @@ public class MainProcess {
     
     public static String process(String line, ble.SyntaxAnalyzer.DataTypes data) throws ScriptException, IOException, Exception {
         String status;
-        CustomDataTypes X = new CustomDataTypes();
         
         status = "Ok";
         
@@ -49,19 +50,6 @@ public class MainProcess {
         
         if(m.find()) {
             Loops.forLoop(line);
-        }
-        
-        p = Pattern.compile(CUSTOM_DT);
-        m = p.matcher(line);
-        
-        boolean stats = true;
-        if(m.find()) {
-            stats = X.run(line);
-            if(stats == true){
-                status = "Ok - Structure";
-            }else if(stats == false){
-                status = "Fail - Structure";
-            }
         }
 
         p = Pattern.compile(COOKIES);
@@ -91,6 +79,21 @@ public class MainProcess {
         if(m.find()) {
             Condi cond = new Condi();
             cond.evalStatement(line);
+        }
+        
+        p = Pattern.compile(NUMBERS);
+        m = p.matcher(line);
+        
+        if(m.find()) {
+           String ret= RecognizeNumbers.recognizeNumbers(line);
+            System.out.println(ret);
+        }
+        
+        p = Pattern.compile(TRIGO);
+        m = p.matcher(line);
+        
+        if(m.find()) {
+            TrigoFunctions.trigoFuncs(line);
         }
         
         p = Pattern.compile(DB);
@@ -131,5 +134,19 @@ public class MainProcess {
         }
         
         return status;
-    }       
+    }
+    
+    public static String customDataType(String code) throws Exception{
+        CustomDataTypes c = new CustomDataTypes();
+        String stats = "Fail";
+        
+        p = Pattern.compile(CUSTOM_DT);
+        m = p.matcher(code);
+ 
+        if(m.find()) {
+            c.run(code);
+            stats = "Ok";
+        }
+        return stats;
+    } 
 }

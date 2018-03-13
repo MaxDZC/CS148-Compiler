@@ -6,6 +6,6 @@ package ble.SyntaxAnalyzer;
  */
 public class TrigoFunctions {
     public static String getTrigoFunctions(){
-        return "\"*\\s*(((arc)?(sin|cos|tan|csc|cot|sec)|toRadians|toDegrees)\\s*\\((\\s+)*((-)\\d+|\\w+)(\\s+)*\\))\\s*\"*";
+        return "((let(\\s+))?(\\w+)(\\s+)\\=(\\s+))?\"*\\s*(((arc)?(sin|cos|tan|csc|cot|sec)|toRadians|toDegrees)\\s*\\((\\s+)*((-)\\d+|\\w+)(\\s+)*\\))\\s*\"*";
     }
 }

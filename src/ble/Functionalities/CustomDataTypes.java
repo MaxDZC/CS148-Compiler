@@ -9,29 +9,40 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.List; 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CustomDataTypes extends Object implements Serializable{
     public static Pattern design = Pattern.compile("design(\\s)+(\\w)+");
     public static Pattern dataPattern = Pattern.compile("(design)\\s+\\w+\\s*(((let)\\s+\\w+\\s+((=)\\s+(\\w+|\\d+|(\\d+(.)\\d+)|((\")\\s*\\w+\\s*(\")))\\s+)*)*)(finish)*");
-    public static Pattern initializeData = Pattern.compile("(Let)(\\s)(\\w+)(\\s?)\\=(\\s?)(\\w+)");
+    public static Pattern initializeData = Pattern.compile("(let)(\\s)(\\w+)(\\s?)\\=(\\s?)(\\w+)");
     public static Pattern accessData = Pattern.compile("(\\w+)(\\.)(\\w+)");
     public static Pattern field = Pattern.compile("\\w+");
     
-    public boolean run(String match) throws FileNotFoundException, IOException, Exception{
+    public void run(String match) throws FileNotFoundException, IOException, Exception{
         CustomDataTypes obj = new CustomDataTypes();
         List<String> list_design = obj.get_StructName(match,design);
         List<String> list_designPattern = obj.get_StructName(match, dataPattern);
         List<String> list_init = obj.get_StructName(match,initializeData);
         List<String> list_access = obj.get_StructName(match,accessData);
-        boolean struct_bol = true, declaration_bol = true;
+        boolean struct_bol = false, declaration_bol = false;
+        
+//        System.out.println(list_design);
+//        System.out.println(list_designPattern);
+//        System.out.println(list_init);
+//        System.out.println(list_access);
         
         struct_bol = checkFor_DatatypeStructure(match,list_designPattern, list_design);
-//        checkFor_DeclarationVariable(match,list_design,list_init);
-//        checkFor_AccesingField(match,list_designPattern,list_init,list_access); 
-        return struct_bol;
+//        if(struct_bol == true){
+//            System.out.println("SUCCESS_STRUCT");
+//        }
+        declaration_bol = checkFor_DeclarationVariable(match,list_design,list_init);
+//        if(declaration_bol == true){
+//            System.out.println("SUCCESS_DECLARE");
+//        }
+        checkFor_AccesingField(match,list_designPattern,list_init,list_access); 
+//        return struct_bol;
      }
     
     //***Tokenizer***//
@@ -49,13 +60,13 @@ public class CustomDataTypes extends Object implements Serializable{
             String d = m.group(0);
             String[] tokens = tokenizer(d,token_M);
             dname = tokens[num];
-        }//else{
-//           switch(num){
-//                case 0 : System.out.println("Datatype Struture not found.."); break;
-//                case 3 : System.out.println("Design keyword not found.."); break;
-//                case 1 : System.out.println("Datatype name not found.."); break;
-//            }
-//        }
+        }else{
+           switch(num){
+                case 0 : System.out.println("Datatype Struture not found.."); break;
+                case 3 : System.out.println("Design keyword not found.."); break;
+                case 1 : System.out.println("Datatype name not found.."); break;
+            }
+        }
         return dname;
     }    
     
@@ -67,7 +78,7 @@ public class CustomDataTypes extends Object implements Serializable{
             String d = m.group(0);
             dname = d;
         }else{
-//            System.out.println("Structure or variable not found!");
+            System.out.println("Structure or variable not found!");
         }
         return dname;
     }    
@@ -88,6 +99,7 @@ public class CustomDataTypes extends Object implements Serializable{
         Matcher m;
         boolean flag = false , flag_init = true, ret = true;
         String design_name1, design_name2, str = "";
+
         
         for(x = 0 ; x < list_dataPattern.size() && flag == false; x++){
             m = dataPattern.matcher((CharSequence) list_dataPattern.get(x));
@@ -115,11 +127,11 @@ public class CustomDataTypes extends Object implements Serializable{
             }
             
             if(flag_init == false){
-//                System.out.println("Duplication of Datatype Structure Name..");
+                System.out.println("Duplication of Datatype Structure Name..");
                 ret = false;
             }
         }else{
-//            System.out.println("An error in one of the Datatype Definition...");
+            System.out.println("An error in one of the Datatype Definition...");
             ret = false;
         }
         return ret;
@@ -166,23 +178,23 @@ public class CustomDataTypes extends Object implements Serializable{
                 }
                 
                 if(flag == true){
-                    //System.out.println("Datatype " + name + " exist..");
+                    System.out.println("Datatype " + name + " exist..");
                 }else{
-//                    System.out.println("Datatype " + init_name + " of variable " + subN + " does not exists..");
+                    System.out.println("Datatype " + init_name + " of variable " + subN + " does not exists..");
                     ret = false;
                 }
             }
         }else{
-//            System.out.println("Duplication of variable names or declaration error..");
+            System.out.println("Duplication of variable names or declaration error..");
             ret = false;
         }
         return ret;
     }
         
     //****For checking accesing field****//
-    public static boolean checkFor_AccesingField(String match, List list_designPattern, List list_init, List list_access)throws Exception{
-        CustomDataTypes obj = new CustomDataTypes();
-        int x,y,i,a,b,trav;
+   public static void checkFor_AccesingField(String match, List list_designPattern, List list_init, List list_access)throws Exception{
+      CustomDataTypes obj = new CustomDataTypes();
+        int x,y,i,a = 0,b,trav;
         Matcher m;
         boolean flag = true, flag_init =  true, flag_design = true, flag_access = false, flag_valid = false, flag_match = false;
         String access_data = null, init_Match = null, name = null, struct_field = null, struct_match = null, hold, hold_sub;
@@ -202,9 +214,9 @@ public class CustomDataTypes extends Object implements Serializable{
               init_Match = extract_Data((String) list_init.get(y),initializeData,"\\s+",1);
                 while(y < list_init.size() && init_Match.equals(access_data) == false){
                     y++;
-                    if(y < list_init.size()){
+                    //if(y < list_init.size()){
                         init_Match = extract_Data((String) list_init.get(y),initializeData,"\\s+",1);
-                    }
+                    //}
                 }
                 if(y  >= list_init.size()){
                     flag_init = false;
@@ -217,14 +229,16 @@ public class CustomDataTypes extends Object implements Serializable{
                     access_data = extract_Data((String) list_access.get(x),accessData,"\\.",0);
                     struct_field = extract_Data((String) list_access.get(x),accessData,"\\.",1);
                     init_Match = extract_Data((String) list_init.get(x),initializeData,"\\s+",1);
-                    for(i = 0; i < list_init.size() && access_data.equals(init_Match) != true; i++){
-                        init_Match = extract_Data((String) list_init.get(x),initializeData,"\\s+",1);
+                    
+                    for(i = 0; i < list_init.size() && access_data.equals(init_Match) == false; i++){
+                        init_Match = extract_Data((String) list_init.get(i),initializeData,"\\s+",1);
                     }
+                    i--;
                     if(i < list_init.size()){
-                        struct_match = extract_Data((String) list_init.get(x),initializeData,"\\s+",3);
+                        struct_match = extract_Data((String) list_init.get(i),initializeData,"\\s+",3);
                     }
                 }
-
+                
                 for( a = 0; a < list_designPattern.size() && flag_valid == false; a++){    
                     sub = obj.get_StructName((String) list_designPattern.get(a),dataPattern);
                     hold = extract_Data(sub.get(0),design,"\\s+",1);
@@ -241,17 +255,17 @@ public class CustomDataTypes extends Object implements Serializable{
                         flag_match = true;
                     }
                 }
-                
+
                 if(flag_match == true){
-                    //System.out.println("Field "+ struct_field + " exist..");
+                    System.out.println("Field "+ struct_field + " exist..");
+                }else{
+                    System.out.println("Field "+ struct_field + " does not exist..");
                 }
+           }else{
+               System.out.println("Variable " + name + " does not exist or does not initialize!");
            }
-        }
-        
-        if(flag == false || flag_match == false){
-            return false;
         }else{
-            return true;
+            System.out.println("Accessing Error");
         }
     }
 }
