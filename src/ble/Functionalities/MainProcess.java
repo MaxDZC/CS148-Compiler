@@ -28,87 +28,106 @@ public class MainProcess {
     static Queue<Integer> qu;
     static Stack<Integer> st;
     
-    public static String process(String line, ble.SyntaxAnalyzer.DataTypes data) throws ScriptException, IOException {
+    public static String process(String[] line, int idx, ble.SyntaxAnalyzer.DataTypes data) throws ScriptException, IOException {
         String status;
 
         status = "Ok";
-        
-        //System.out.println(line);
+
         p = Pattern.compile(REPEAT);
-        m = p.matcher(line);
+        m = p.matcher(line[idx]);
 
         if(m.find()) {
-            Loops.repeat(line);
+            Loops.repeat(line[idx], line, idx);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on repeat loop function");
         }
-        
+
         p = Pattern.compile(FORLOOP);
-        m = p.matcher(line);
-        
+        m = p.matcher(line[idx]);
+
         if(m.find()) {
-            Loops.forLoop(line);
+            Loops.forLoop(line[idx]);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on for loop function");
         }
 
         p = Pattern.compile(COOKIES);
-        m = p.matcher(line);
+        m = p.matcher(line[idx]);
 
         if(m.find()) {
-            status = Cookies.cookies(line);
+            status = Cookies.cookies(line[idx]);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on cookies");
         }
-        
+
         p = Pattern.compile(DISPLAY);
-        m = p.matcher(line);
-        
+        m = p.matcher(line[idx]);
+
         if(m.find()) {
-            Display.run(line);
+            Display.run(line[idx]);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on display function");
         }
-        
+
         p = Pattern.compile(VALIDATION);
-        m = p.matcher(line);
-        
+        m = p.matcher(line[idx]);
+
         if(m.find()) {
-            ValidationFunct.run(line);
+            ValidationFunct.run(line[idx]);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on validation");
         }
-        
+
         p = Pattern.compile(CONDITIONAL);
-        m = p.matcher(line);
-        
+        m = p.matcher(line[idx]);
+
         if(m.find()) {
             Condi cond = new Condi();
-            cond.evalStatement(line);
+            cond.evalStatement(line[idx]);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on conditional statements");
         }
-        
+
         p = Pattern.compile(DB);
-        m = p.matcher(line);
-        
+        m = p.matcher(line[idx]);
+
         if(m.find()) {
-            Database.test(line);
+            Database.test(line[idx]);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on database syntax");
         }
-        
+
         p = Pattern.compile(TIME_LIB);
-        m = p.matcher(line);
-        
+        m = p.matcher(line[idx]);
+
         if(m.find()) {
             TimeLibraryModel t1 = new TimeLibraryModel();
-            t1.checkTimeFunctionality(line);
+            t1.checkTimeFunctionality(line[idx]);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on time library");
         }
-        
+
         p = Pattern.compile(Queue_stack.getQueue());
-        m = p.matcher(line);
-        
+        m = p.matcher(line[idx]);
+
         if(m.find()) {
-            Queue1.declareQueue(qu, line);
-        }  
+            Queue1.declareQueue(qu, line[idx]);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on queue functions");
+        }
         
         p = Pattern.compile(Queue_stack.getStack());
-        m = p.matcher(line);
-        
+        m = p.matcher(line[idx]);
+
         if(m.find()) {
-            Stack1.declareStack(st, line);
+            Stack1.declareStack(st, line[idx]);
+        }else if (!m.find()){
+            System.out.println("Syntax Error on stack functions");
         }
-        
+
         p = Pattern.compile(ARRAYS);
-        m = p.matcher(line);
-        
+        m = p.matcher(line[idx]);
+
         if(m.find()) {
             ArraysFunct.arrayStuff(line, data.allVars);
             ArraysFunct.findFunction(data.allVars);

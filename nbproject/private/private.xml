@@ -3,7 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/workspace/ble/src/ble/BleDriver.java</file>
+			<file>file:/C:/workspace/ble/src/ble/BleDriver.java</file>
             <file>file:/C:/workspace/ble/src/ble/Storage/BleStorage.java</file>
             <file>file:/C:/workspace/ble/src/ble/SyntaxAnalyzer/DataTypes.java</file>
             <file>file:/C:/workspace/ble/src/ble/SyntaxAnalyzer/Data.java</file>
@@ -11,6 +11,7 @@
             <file>file:/C:/workspace/ble/src/ble/Functionalities/ArraysFunct.java</file>
             <file>file:/C:/workspace/ble/src/ble/objects/ArrayBle.java</file>
             <file>file:/C:/workspace/ble/src/ble/SyntaxAnalyzer/Arrays.java</file>
+
         </group>
     </open-files>
 </project-private>

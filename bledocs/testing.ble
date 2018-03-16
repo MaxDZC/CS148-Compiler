@@ -6,13 +6,16 @@
 	<body>
 
 		<@BLE
+			let arr = Array()
+			insert(arr, 1)
+			insert(arr, 'val', 'key')
+			insert(arr, 'val2', 'key2', 1)
+			insert(arr, 'val3')
 			
+			delete(arr, 1)
 			
-			let arr2 = Array2D(2, 5)
-			insert(arr2, 'sample', 1, 4)
-			
-			
-		@>
+			let stat = search(arr, 'val')
+			let x = retrieve(arr, 3)
 		<h1><@BLE x @></h1>
 
 	</body>
