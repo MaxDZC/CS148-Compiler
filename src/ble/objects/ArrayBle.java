@@ -23,8 +23,8 @@ public class ArrayBle {
 	public Object get (String key) {
 		Object ret = null;
 		int i;
-		
-		for(i = 0 ; i < l.size() && l.get(i).getKey().contentEquals(key); i++) { }
+		System.out.println(key);
+		for(i = 0 ; i < l.size() && !l.get(i).getKey().equals(key); i++) { }
 		if( i < l.size()) {
 			ret = l.get(i).getValue();
 		}
@@ -33,6 +33,7 @@ public class ArrayBle {
 	}
 	
 	public Object get (int index) {
+            
 		return (index < l.size()) ? l.get(index).getValue() : null;
 	}
 	
@@ -72,13 +73,14 @@ public class ArrayBle {
 	
 	public void insert(String key, Object value) {
 		ArrayElement<Object> e = new ArrayElement<>(key,value);
-		
+		System.out.println("Key: "+e.getKey()+" Val: "+e.getValue());
 		l.add(e);
 	}
 	
 	
 	public void insert(String key, Object value, int position) {
 		ArrayElement<Object> e = new ArrayElement<>(key,value);
-		l.add(position, e);
+		//if(l.lastIndexOf(value) > position){
+                l.add(position, e);     
 	}
 }

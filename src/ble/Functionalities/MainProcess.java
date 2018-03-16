@@ -33,6 +33,7 @@ public class MainProcess {
 
         status = "Ok";
         
+        //System.out.println(line);
         p = Pattern.compile(REPEAT);
         m = p.matcher(line);
 
@@ -109,8 +110,8 @@ public class MainProcess {
         m = p.matcher(line);
         
         if(m.find()) {
-        //    ArraysFunct.arrayStuff(line);
-       //     ArraysFunct.findFunction(data.allVars);
+            ArraysFunct.arrayStuff(line, data.allVars);
+            ArraysFunct.findFunction(data.allVars);
         }
         
         return status;

@@ -78,8 +78,8 @@ public class BleSyntaxChecker {
 		if (m.find() && !cond) {			// checks if function
 			ArraysFunct arrFunction = new ArraysFunct();
 			
-			if(arrFunction.getFunction(line)) {
-				arrFunction.findFunction(storage.getStorage());
+			if(arrFunction.getFunction() != null) {
+				//arrFunction.findFunction(storage.getStorage());
 				cond = true;
 			}
 		}

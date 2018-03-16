@@ -7,6 +7,7 @@ import ble.Http.Server;
 import ble.Storage.BleStorage;
 import ble.SyntaxAnalyzer.*;
 import ble.injector.ImbedHtml;
+import ble.objects.ArrayBle;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,8 +28,7 @@ import javax.script.ScriptException;
 
 
 public class BleDriver {
-
-	static SyntaxAnalyzer sa = new SyntaxAnalyzer();
+    static SyntaxAnalyzer sa = new SyntaxAnalyzer();
     //Temporary for reading every .ble file for http upload to browser
     private static final File CONSTANT_FOLDER = new File("bledocs/");
     private static final File[] CONSTANT_LISTOFFILES = CONSTANT_FOLDER.listFiles();
@@ -39,6 +39,7 @@ public class BleDriver {
     
     public static void main(String[] args) throws IOException, ScriptException, Exception {
     	ble.SyntaxAnalyzer.DataTypes data = new DataTypes();
+        //data.allVars.
     	SyntaxAnalyzer syn = new SyntaxAnalyzer();
     	MainProcess mp = new MainProcess();
     	
@@ -88,34 +89,50 @@ public class BleDriver {
                     System.out.println(result);
                     
                     if(syn.analyze(result)) {
-                        String[] lines1 = result.split("\n");
+                        System.out.println("Analyzed!!!");
+                        String[] lines1 = result.split("\\n");
+                        
                         for (String line : lines1) {
                                 if(!line.trim().equals("")) {
+                                    System.out.println("Line :"+line);
                                     resultGet.add(line);
                                     status = MainProcess.process(line, data);
-                                    System.out.println(status);
                                 }
                         }
 	                    //results[0] = "varX = "+" "+MDASFunc.evalExp(result);
-	                    
-                            results = resultGet.toArray(new String[0]);
-                            
-	                    ImbedHtml injectResult = new ImbedHtml(bleCode, results);
-	                    Server server = new Server();
-	                    
-	                    System.out.println("File: "+file.getName());
-	                    injectResult.imbedResults();
-	                    server.setContext(file.getName());
-	                    server.setResponse(injectResult.getHtmlCode());
-	                    server.setSocketNo(ctr);
-	                    System.out.println("Located at: localhost:"+server.getSocketNo()+server.getContext());
-	                    
-	                    Server.server(null);
-	                    ctr++;
+	                 
+                        
+                        results = resultGet.toArray(new String[0]);
+
+                        ImbedHtml injectResult = new ImbedHtml(bleCode, results);
+                        Server server = new Server();
+
+                        System.out.println("File: "+file.getName());
+                        injectResult.imbedResults();
+                        server.setContext(file.getName());
+                        server.setResponse(injectResult.getHtmlCode());
+                        server.setSocketNo(82);
+                        System.out.println("Located at: localhost:"+server.getSocketNo()+server.getContext());
+
+                        //Server.server(null);
+                        ctr++;
 	                }
                 }
         
         }
+        
+        Data<ArrayBle> arr = (Data<ArrayBle>) data.allVars.get("arr");
+        ArrayBle array = (ArrayBle) arr.getValue();
+        //System.out.println("Array arr = "+array);
+        for(i=0; i<array.size(); i++){
+            System.out.println("Index "+i+": "+array.get(i));
+        }
+        System.out.println("Index key: "+array.get("key2"));
+        Data<Object> x = (Data<Object>)data.allVars.get("x");
+        System.out.println("X value: "+x.getValue());
+        Data<Object> stat = (Data<Object>)data.allVars.get("stat");
+        System.out.println("Stat value: "+stat.getValue());
+                        
     }
 
 }

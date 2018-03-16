@@ -6,16 +6,14 @@
 	<body>
 
 		<@BLE
-			let varX = 10
-			let varY = 1
-			let arr = Array()
-
+			
+			
+			let arr2 = Array2D(2, 5)
+			insert(arr2, 'sample', 1, 4)
+			
+			
 		@>
-		<h1>Select 10 or 20</h1>
-
-		<select>
-			<option value=<@BLE varX @>>30</option>
-		</select>
+		<h1><@BLE x @></h1>
 
 	</body>
 </html>
