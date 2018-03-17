@@ -1,0 +1,63 @@
+/*
+    GLOBAL STYLES
+*/
+
+body{
+  color: #000;
+  font-family: Segoe UI;
+  font-size: 1.5em;
+}
+
+input, select{
+  width: 100%;
+}
+
+h1{
+  font-family: Georgia;
+  font-weight: 600;
+  font-size: 3em;
+  font-style: italic;
+}
+
+/*
+    PAGE STYLES
+*/
+.page__date-separator{
+  margin: 0.5em 0;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+/*
+    CARD STYLES
+*/
+
+.card__holder{
+  padding: 1em 0.25em !important;
+  width: 100%;
+  border: 1px solid #D1D2D4;
+}
+
+.card__byline--by{
+  font-variant: small-caps;
+  text-transform: lowercase;
+}
+
+.card__byline--name{
+  font-weight: 500;
+}
+
+.card__title{
+  padding-top: 0.5em;
+  font-family: Georgia;
+  font-size: 1.75em;
+}
+
+.card__button-holder{
+  padding-right: 1em;
+  float: right;
+  color: #2E3192;
+  font-weight: 500;
+  text-align: right;
+}
