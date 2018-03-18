@@ -29,5 +29,6 @@ public class Data<T> {
     
         
     }
+    public Data(){}
 
 }    
