@@ -1,21 +1,33 @@
 package ble.SyntaxAnalyzer;
 
 public class Data<T> {
+
     private T value; 
-    private String scope;
+    public static int currScope = 0;
+    private int varScope; 
+    
+    
+    public int getScope() 
+    {
+        return varScope;
+    }
 
     public T getValue() {
-            return value;
+	return value;
     }
-    public void setValue(T value) {
-            this.value = value;
+
+    public void setValue(T value) 
+    {
+        // value is "" if let va
+	this.value = value; 
+        
     }
-	
-	public String getScope() {
-            return scope;
+    public Data(boolean newScope){
+        if(newScope){
+            this.varScope = Data.currScope; 
+        }
+    
+        
     }
-    public  void setScope(String scope) {
-            this.scope = scope;
-    }
-	
+
 }    
