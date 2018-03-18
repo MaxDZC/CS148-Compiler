@@ -5,50 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-public class DataTypes {
-    public static Map<String, Data> allVars = new HashMap<String, Data>();
-   
-    public static void test(String[] args) throws IOException{
-    	// int, float, char, string, bool
-    	
-    	
-    	//let varName
-    	String test1 = "let y \n";
-    	String test2 = "let 2yella1s2 \n";
-    	
-    	String letVar = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
-    	
-        checkSyntax(test1);
-        checkSyntax(test2);
-        
-    	// let y = 10
-    	
-    	String test3 = "let val2  = 2.9 \n";
-    	String test4 = "let valstring  = \"string\" \n";
-    	String test5 = "let errorSt = \n";
-    	
-    //	String letVarVal = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*\"?(\\w+)+\"?\\s*[\r\n]";
-    	
-    	checkSyntax(test3);
-    	checkSyntax(test4);
-    	checkSyntax(test5);
-    	
-        test5 = "y = \" \"\n";
-        checkSyntax(test5);
-        
-        test5 = "y = 0.9 \n";
-        checkSyntax(test5);
-        
-        Float hhh= (Float) allVars.get("y").getValue(); 
-        System.out.println(hhh  + 2);
-/* =======
-      
-    public static Map<String, Data> vars = new HashMap<String, Data>(); 
+public class DataTypes<T> {
+    public static Map<String, Data> vars = new HashMap<String, Data>();     
     
-    public static Map<Integer,Map<String, Data>> varMap = new HashMap<Integer,Map<String, Data>>();
 
-        
-    
     public static void storeVar(String toCheck) throws IOException
     {
         String varName, value;
@@ -58,31 +18,30 @@ public class DataTypes {
         String letVarVar = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
         String varVar = "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
         System.out.println("\n***statement:\n" + toCheck);
-
-
-
+        
+        checkIfNewScope(toCheck);
         if(toCheck.matches(letVar)){
             varDec(toCheck);
         }else if(toCheck.matches(letVarVal)){
+            varDec(toCheck);
+        }else if(toCheck.matches(letVarVar)){
             varDec(toCheck);
         }else if(toCheck.matches(varVal)){
             varName = toCheck.replaceAll(varVal, "$1"); 
             value = toCheck.replaceAll(varVal, "$2");
             if(doesVarExist(varName)){
-                changeVal(varName, value);
+                saveVar(varName, value, false);
             }else{
-                System.out.println("var " + varName + " not declared or outside of scope lol");
+                dispErrorVariable("Variable must be declared first.", varName);
             }
-        }else if(toCheck.matches(letVarVar)){
-            varDec(toCheck);
         }else if(toCheck.matches(varVar)){
             value = toCheck.replaceAll(varVar, "$2");
             varName = toCheck.replaceAll(varVar, "$1");
 
             if(doesVarExist(varName) && doesVarExist(value)){
-                changeVal(varName, value);
+                saveVar(varName, value, false);
             }else{
-                System.out.println("cannot find " + varName + " or " + value + " or both ");
+                dispErrorVariable("Unable to find variables.", varName + "or" + value);
             }
         }else{
             System.out.println(toCheck + "**does not match syntax");
@@ -91,6 +50,92 @@ public class DataTypes {
         //toCheck.matches(varVar)
             
     } 
+    
+    /***************************************************************************
+     * getValue
+    ***************************************************************************/
+    
+    public static float getValueFloat(String varName)
+    {
+        return (float) vars.get(varName).getValue();
+    }
+    public static int getValueInt(String varName)
+    {
+            return (int) vars.get(varName).getValue();
+    }  
+    public static String getValueString(String varName)
+    {
+            return (String) vars.get(varName).getValue();
+    }
+
+    /**
+     *
+     * @param varName
+     * @return
+     */
+    public T getValueGeneric(String varName)
+    {
+        return (T) vars.get(varName).getValue(); 
+    }
+       
+    /***************************************************************************
+     * Scope
+    ***************************************************************************/
+    public static void checkIfNewScope(String exp){
+       //String newScopeExp = "\t.+\n";
+      
+           int count = exp.length() - exp.replace("\t", "").length();
+           System.out.println("ALL COUNT : " + Data.currScope + exp);
+           
+           if(Data.currScope < count ){
+               setNewScope(); 
+           }else if(Data.currScope > count){
+               endScope(); 
+           }
+           
+       
+
+    }
+    public static void setNewScope() 
+    {
+       Data.currScope++;
+    }
+    public static void endScope()
+    {
+        Data.currScope--;
+        deleteVarInScope();
+    }
+    public static boolean doesVarExist(String varName)
+    {
+        if(vars.containsKey(varName)){
+            return true;
+        }else{
+            return false;
+        }
+            
+    }
+    
+    
+    
+    public static String getSyntax() {
+        String syntax;
+        
+        syntax = "(\\s*let\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
+
+        syntax += "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*)\"|-?\\d+(\\.?\\d+|))+\\s*[\r\n]";
+        syntax += "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*\")|([+-]?([0-9]*[.])?[0-9]+))\\s*[\r\n]";
+        syntax += "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
+        syntax += "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
+        
+        
+        
+        System.out.println(syntax);
+    
+        return syntax;   
+    }
+    
+    
+    /* stuff */
     private static void varDec(String statement)
     {
         String letVar = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";            
@@ -118,33 +163,32 @@ public class DataTypes {
         }
 
        
-
-        changeVal(varName, value);
+        if(!doesVarExist(varName)){
+            saveVar(varName, value, true);
+        }else{
+            dispErrorVariable("Variable has already been declared", varName);
+        }
+        
     }
-    private static void changeVal(String name, String val)
+    
+    private static void saveVar(String name, String val, boolean NewDec)
     {
         val = val.replaceAll("\n", "");
         String intExp = "(?<!\\.)\\b[0-9]+\\b(?!\\.)";
-
         String stringExp = "\"([^\"]*)\"";
         String floatExp = "\\d+\\.\\d+";
-
         String varExp = "\\s*([a-z|A-Z]+\\w*)\\s*";
-
-       
-        try{
-            if(val.matches(intExp)){
+        
+        if(val.matches(intExp)){
                 int res = Integer.parseInt(val);
-                Data<Integer> valu = new Data<Integer>();
-               // valu.setScope(true); // false if non static
+                Data<Integer> valu = new Data<>(NewDec);
                 valu.setValue(res);
-
                 vars.put(name, valu);
 
             }else if(val.matches(stringExp)){
 
                 val = val.replaceAll(stringExp, "$1");
-                Data<String> valu = new Data<String>();
+                Data<String> valu = new Data<>(NewDec);
                // valu.setScope(false); // false if non static
                 valu.setValue(val);
                 vars.put(name, valu);
@@ -153,191 +197,67 @@ public class DataTypes {
 
                 float res = Float.parseFloat(val);
 
-                Data<Float> valu = new Data<Float>();
+                Data<Float> valu = new Data<>(NewDec);
                 valu.setValue(new Float(res).floatValue());
               //  valu.setScope(false); // false if non static
                 vars.put(name, valu);
             }else if(val.matches(varExp)){
-                System.out.println("inside varExp");
+               
                 if(doesVarExist(val)){
                     vars.put(name, vars.get(val));
                 }else{
                     //error message (var does not exist)
-                    Data.outVarUndeclared(val);
-                    System.out.println("unsuccessfully created val");
+                    dispErrorVariable("Variable " + val + " does not exist", name); 
                     // THROW ERROR
                 }
-            }else{
-                System.out.println("Data Type Error");
-            }
-            System.out.println("data type:\n" + vars.get(name).getValue().getClass());
-            System.out.println(name+" successfully stored?\n"+vars.containsKey(name));
-            System.out.println("value of "+name+":\n"+vars.get(name).getValue());
-        }catch(Exception e){
-            System.out.println(e);
-        }   
-    }
->>>>>>> e8ca5a726496a79bd0915c340ba6bd1477811dff
- */        
-    public static boolean doesVarExist(String varName)
-    {
-        if(vars.containsKey(varName) && Data.currScope == vars.get(varName).getScope()){
-            return true;
-        }else{
-            return false;
-        }
             
+            }else{
+                
+                dispErrorVariable("Unknown Datatype? ", name); 
+            }
+            
+     
+            
+        if(vars.containsKey(name)){
+            System.out.println(name+" successfully stored?\n"+vars.containsKey(name));
+            System.out.println("data type:\n" + vars.get(name).getValue().getClass());
+            System.out.println("value of "+name+":\n"+vars.get(name).getValue());
+        }
+           
+         
     }
-    
-    /***************************************************************************
-     * getValue shit
-     * needs improvement
-    ***************************************************************************/
-    public static float getValueFloat(String varName)
+
+    private static void deleteVarInScope()
     {
-        return (float) vars.get(varName).getValue();
-    }
-    public static int getValueInt(String varName)
-    {
-            return (int) vars.get(varName).getValue();
-    }  
-    public static String getValueString(String varName)
-    {
-            return (String) vars.get(varName).getValue();
-    }
+        
+        Set x = vars.keySet();
        
-    /***************************************************************************
-     * Scope shit
-    ***************************************************************************/
-    public static void setNewScope() 
-    {
-       // from old scope
-       varMap.put(Data.currScope, vars);
-       vars = new HashMap<String, Data>(); 
-       // call if new scope
-       Data.currScope++;
+        List<String> deleteKeys = new ArrayList<String>();
+        
+       
+        for (Object key : x) {
+            String keyS = (String)key; 
+            if(vars.get(keyS).getScope() > Data.currScope){
+               //vars.remove(keyS); --> error 
+               deleteKeys.add(keyS);
+            }
+        }
+        System.out.println("out of scope: " + deleteKeys);
+        for(String key: deleteKeys){
+            vars.remove(key);
+        } 
     }
-    public static void endScope()
-    {
-        // delete all data with currScope then: 
-        Data.currScope--;
-        vars = varMap.get(Data.currScope);
-        //deleteVarInScope();
-    }
-        
-    public static String getSyntax() {
-        String syntax;
-        
-        syntax = "(\\s*let\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
-
-        syntax += "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*)\"|-?\\d+(\\.?\\d+|))+\\s*[\r\n]";
-        syntax += "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*\")|([+-]?([0-9]*[.])?[0-9]+))\\s*[\r\n]";
-        syntax += "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
-        syntax += "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
-        
-        
-        
-        System.out.println(syntax);
+    private static void dispErrorVariable(String err, String varName)
+    {   
+        System.out.println("Unable to declare variable: " + varName); 
+        System.out.println(err);
     
-        return syntax;
     }
+    
 
-    public static void checkSyntax(String toCheck) throws IOException
-    {
-            String varName, value;
-            String letVar = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
-            String letVarVal = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*)\"|-?\\d+(\\.?\\d+|))+\\s*[\r\n]";
-    //	String varVal = "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*)\"|-?\\d+(\\.?\\d+|))+\\s*[\r\n]";
-            String varVal = "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*\")|([+-]?([0-9]*[.])?[0-9]+))\\s*[\r\n]";
-
-            //Creating a file
-            File f = new File("C://Desktop//values.txt");
-            FileWriter fr = null;
-
-            System.out.println("\n***\n" + toCheck);
-            if(toCheck.matches(letVar)){
-                // let varName
-                varName = toCheck.replaceAll(letVar, "$1");
-
-                storeVars(varName, "\"\"");
-            }else if(toCheck.matches(letVarVal)){
-                // let varName = value
-                varName = toCheck.replaceAll(letVarVal, "$1");
-                value = toCheck.replaceAll(letVarVal, "$2");
-                /*varName = toCheck.replaceAll("(=\\s*(\"?([^\"]*)\"|-?\\d+(\\.?\\d+|))+\\s*[\r\n])$", "");
-                varName = varName.replaceAll("\\s*let\\s*", "");
-                value = toCheck.replaceAll("\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*", "");
-                value = value.replaceAll("\\s*[\r\n]$", ""); */
-                System.out.println("value " + value);
-
-                //Writing to file
-                fr = new FileWriter(f);
-                fr.write(allVars.get(letVarVal).getValue().getClass().getName());
-                fr.write((String) allVars.get(letVarVal).getValue());
-
-                storeVars(varName, value);
-            }else if(toCheck.matches(varVal)){
-                // y = value here ;
-                varName = toCheck.replaceAll(varVal, "$1");
-                //value = toCheck.replaceAll("\\s*([a-z|A-Z]+\\w*)\\s*=\\s*", "");
-                value = toCheck.replaceAll(varVal, "$2");
-
-                if(allVars.containsKey(varName)){
-
-                    fr = new FileWriter(f);
-                    fr.write(allVars.get(varName).getValue().getClass().getName());
-                    fr.write((String) allVars.get(varName).getValue());
-
-                    storeVars(varName, value);
-                }else{
-                    System.out.println("var " + varName + " not declared");
-                }
-            }else{
-                System.out.println(toCheck + "**does not match syntax");
-            }
-            fr.close();
-    }               
-
-    public static void storeVars(String name, String val)
-    {
-            val = val.replaceAll("\n", "");
-            String intExp = "(?<!\\.)\\b[0-9]+\\b(?!\\.)";
-
-            String stringExp = "\"([^\"]*)\"";
-            String floatExp = "\\d+\\.\\d+";
-            //allVars.put(name, val);
-
-            if(val.matches(intExp)){
-
-                    int res = Integer.parseInt(val);
-                    Data<Integer> valu = new Data<Integer>();
-                    valu.setValue(res);
-
-                    allVars.put(name, valu);
-
-            }else if(val.matches(stringExp)){
-
-                    val = val.replaceAll(stringExp, "$1");
-                    Data<String> valu = new Data<String>();
-                    valu.setValue(val);
-                    allVars.put(name, valu);
-
-            }else if(val.matches(floatExp)){
-                    //val = val.replaceAll(floatExp, "$1");
-
-                    float res = Float.parseFloat(val);
-                    Data<Float> valu = new Data<Float>();
-                    valu.setValue(res);
-                    allVars.put(name, valu);
-
-
-            }else{
-                    System.out.println("did not match anything");
-            }
-            System.out.println(allVars.get(name).getValue().getClass().getName());
-            System.out.println(name+" successfully stored? "+allVars.containsKey(name));
-            System.out.println("value of "+name+": "+allVars.get(name).getValue()+"\n");
-    }	
 }
+	
+	
+	
 
 
