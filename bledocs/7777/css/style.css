@@ -54,6 +54,13 @@ h1{
   font-size: 1.75em;
 }
 
+.card__view_title{
+  font-family: Georgia;
+  font-weight: 600;
+  font-size: 2em;
+  font-style: bold;
+}
+
 .card__button-holder{
   padding-right: 1em;
   float: right;

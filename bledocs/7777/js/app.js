@@ -1,7 +1,8 @@
 var app = angular.module('compiler', [
   'ngRoute',
   'compiler.login',
-  'compiler.userAnnouncements'
+  'compiler.userAnnouncements',
+  'compiler.viewAnnouncements'
 ]);
 
 app.config(function ($routeProvider){  
@@ -10,8 +11,12 @@ app.config(function ($routeProvider){
       templateUrl: '/components/login/login.html',
       controller: 'loginController'
     }) 
+    .when('/viewAnnouncements', {
+      templateUrl: '/components/announcements/viewAnnouncements.html',
+      controller: 'viewAnnouncementsController'
+    }) 
     .when('/', {
-      templateUrl: 'components/announcements/announcements.html',
+      templateUrl: '/components/announcements/announcements.html',
       controller: 'userAnnouncementsController'
     })
     .otherwise({
