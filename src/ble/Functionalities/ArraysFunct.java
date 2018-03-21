@@ -179,7 +179,7 @@ public class ArraysFunct {
                                         System.out.println("Array Initialization . . .");
 					ArrayBle arr = new ArrayBle();
 					Data<ArrayBle> data = new Data<ArrayBle>(false);
-					data.setScope(0);
+					//data.setNewScope();
 					data.setValue(arr);
 					memory.put(f, data);
                                         returnValue = (String) "Array Initialized";
@@ -187,7 +187,7 @@ public class ArraysFunct {
                                         System.out.println("Array2D Initialization . . .");
                                         ArrayBle[][] arr2d = new ArrayBle[Integer.parseInt(params[0])][Integer.parseInt(params[1])];
                                         Data<ArrayBle[][]> data2d = new Data<ArrayBle[][]>(false);
-                                        data2d.setScope(0);
+                                      //  data2d.setScope(0);
                                         data2d.setValue(arr2d);
                                         memory.put(f, data2d);
                                         returnValue = (String) "Array2D Initialized";
