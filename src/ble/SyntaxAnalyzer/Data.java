@@ -10,12 +10,9 @@ public class Data<T> {
     {
         return varScope;
     }
-    
-    public void setScope(int scope) {
-    	this.varScope = scope;
-    }
+
     public T getValue() {
-    	return value;
+	return value;
     }
 
     public void setValue(T value) 
@@ -24,7 +21,6 @@ public class Data<T> {
 	this.value = value; 
         
     }
-    
     public Data(boolean newScope){
         if(newScope){
             this.varScope = Data.currScope; 
@@ -32,10 +28,8 @@ public class Data<T> {
     
         
     }
-    // ??? 
-    public static void outVarUndeclared(String varName){
-        System.out.println("Varible " + varName + " does not exist.");
+    public Data(){
+        
     }
-    
 
 }

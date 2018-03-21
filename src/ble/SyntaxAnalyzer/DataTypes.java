@@ -8,7 +8,6 @@ import java.util.*;
 public class DataTypes<T> {
      public static Map<String, Data> vars = new HashMap<String, Data>();     
     
-
     public static void storeVar(String toCheck) throws IOException
     {
         String varName, value;
@@ -18,7 +17,8 @@ public class DataTypes<T> {
         String letVarVar = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
         String varVar = "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
         System.out.println("\n***statement:\n" + toCheck);
-
+        
+        checkIfNewScope(toCheck);
         if(toCheck.matches(letVar)){
             varDec(toCheck);
         }else if(toCheck.matches(letVarVal)){
@@ -53,6 +53,7 @@ public class DataTypes<T> {
     /***************************************************************************
      * getValue
     ***************************************************************************/
+    
     public static float getValueFloat(String varName)
     {
         return (float) vars.get(varName).getValue();
@@ -79,6 +80,21 @@ public class DataTypes<T> {
     /***************************************************************************
      * Scope
     ***************************************************************************/
+    public static void checkIfNewScope(String exp){
+       //String newScopeExp = "\t.+\n";
+      
+           int count = exp.length() - exp.replace("\t", "").length();
+           System.out.println("ALL COUNT : " + Data.currScope + exp);
+           
+           if(Data.currScope < count ){
+               setNewScope(); 
+           }else if(Data.currScope > count){
+               endScope(); 
+           }
+           
+       
+
+    }
     public static void setNewScope() 
     {
        Data.currScope++;
@@ -161,7 +177,7 @@ public class DataTypes<T> {
         String stringExp = "\"([^\"]*)\"";
         String floatExp = "\\d+\\.\\d+";
         String varExp = "\\s*([a-z|A-Z]+\\w*)\\s*";
-
+        
         if(val.matches(intExp)){
                 int res = Integer.parseInt(val);
                 Data<Integer> valu = new Data<>(NewDec);
@@ -238,23 +254,5 @@ public class DataTypes<T> {
         System.out.println(err);
     
     }
-    private static void printAllVars()
-    {
-        System.out.println("**************************************************");
-        System.out.println("**************** all vars **********************");
-        System.out.println("**************************************************");
-        Set x = vars.keySet();
-        
 
-        for (Object key : x) {
-            String keyS = (String)key; 
-            System.out.println("key: " + keyS + " value: " + 
-                    vars.get(keyS).getValue() + " scope: " + 
-                    vars.get(keyS).getScope());
-        }
-        
-        System.out.println("**************************************************");
-        System.out.println("**************************************************");
-        System.out.println("**************************************************");
-    }
 }
