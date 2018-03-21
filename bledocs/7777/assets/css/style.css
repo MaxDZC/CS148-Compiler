@@ -137,6 +137,15 @@ h1{
   font-size: 20px;
 }
 
+.logoutBtn{
+    margin-top: 2%;
+    font-size: 15px;
+    float: right;
+    margin-right: 10%;
+}
+
+
+
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
   content: "";
