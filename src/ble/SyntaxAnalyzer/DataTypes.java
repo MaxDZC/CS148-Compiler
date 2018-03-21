@@ -80,11 +80,10 @@ public class DataTypes<T> {
     /***************************************************************************
      * Scope
     ***************************************************************************/
-    public static void checkIfNewScope(String exp){
+    public static void checkIfNewScope(String exp){   
        //String newScopeExp = "\t.+\n";
       
            int count = exp.length() - exp.replace("\t", "").length();
-           System.out.println("ALL COUNT : " + Data.currScope + exp);
            
            if(Data.currScope < count ){
                setNewScope(); 
