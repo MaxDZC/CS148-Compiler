@@ -80,20 +80,17 @@ public class DataTypes<T> {
     /***************************************************************************
      * Scope
     ***************************************************************************/
-    public static void checkIfNewScope(String exp){
+    public static void checkIfNewScope(String exp)
+    {
        //String newScopeExp = "\t.+\n";
       
            int count = exp.length() - exp.replace("\t", "").length();
-           System.out.println("ALL COUNT : " + Data.currScope + exp);
-           
+          
            if(Data.currScope < count ){
                setNewScope(); 
            }else if(Data.currScope > count){
                endScope(); 
            }
-           
-       
-
     }
     public static void setNewScope() 
     {
@@ -119,7 +116,7 @@ public class DataTypes<T> {
     public static String getSyntax() {
         String syntax;
         
-        syntax = "(\\s*let\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
+        syntax = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
 
         syntax += "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*)\"|-?\\d+(\\.?\\d+|))+\\s*[\r\n]";
         syntax += "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*\")|([+-]?([0-9]*[.])?[0-9]+))\\s*[\r\n]";
