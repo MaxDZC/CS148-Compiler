@@ -1,3 +1,4 @@
+
 package ble;
 
 
@@ -6,6 +7,7 @@ import ble.Functionalities.MainProcess;
 import ble.Http.Server;
 import ble.Storage.BleStorage;
 import ble.SyntaxAnalyzer.*;
+import ble.injector.ImbedHtml;
 import ble.objects.ArrayBle;
 import java.util.Arrays;
 import java.io.BufferedReader;
@@ -54,7 +56,7 @@ public class BleDriver {
             // Getting rid of Comments
             bleCode = Comments.comments(bleCode);
             
-            // Check the code line-by-line and check what function to use :(
+            // Check the code line-by-line and check what function to use 😞
             lines = bleCode.split(System.getProperty("line.separator"));
             
             for(i = 0; i < lines.length; i++) {
@@ -91,12 +93,14 @@ public class BleDriver {
                         System.out.println("Analyzed!!!");
                         String[] lines1 = result.split("\\n");
                         
-                        for (String line : lines1) {
-                                if(!line.trim().equals("")) {
-                                    System.out.println("Line :"+line);
-                                    resultGet.add(line);
-                                    status = MainProcess.process(line, data);
-                                }
+                        for(int i1 = 0 ; i1 < lines1.length; i1++) {
+                            String line = lines1[i1];
+                        	if(!line.trim().equals("")) {
+                        		resultGet.add(line);
+                                System.out.println("Line :"+line);
+                                resultGet.add(line);
+                                status = MainProcess.process(lines1,i1, data);
+                            }
                         }
 	                    //results[0] = "varX = "+" "+MDASFunc.evalExp(result);
 
@@ -120,16 +124,16 @@ public class BleDriver {
         
         }
         
-        Data<ArrayBle> arr = (Data<ArrayBle>) data.allVars.get("arr");
+        Data<ArrayBle> arr = (Data<ArrayBle>) data.vars.get("arr");
         ArrayBle array = (ArrayBle) arr.getValue();
         //System.out.println("Array arr = "+array);
         for(i=0; i<array.size(); i++){
             System.out.println("Index "+i+": "+array.get(i));
         }
         System.out.println("Index key: "+array.get("key2"));
-        Data<Object> x = (Data<Object>)data.allVars.get("x");
+        Data<Object> x = (Data<Object>)data.vars.get("x");
         System.out.println("X value: "+x.getValue());
-        Data<Object> stat = (Data<Object>)data.allVars.get("stat");
+        Data<Object> stat = (Data<Object>)data.vars.get("stat");
         System.out.println("Stat value: "+stat.getValue());
                         
     }

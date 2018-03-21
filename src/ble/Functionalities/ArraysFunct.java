@@ -178,16 +178,16 @@ public class ArraysFunct {
 				if(params == null) {
                                         System.out.println("Array Initialization . . .");
 					ArrayBle arr = new ArrayBle();
-					Data<ArrayBle> data = new Data<ArrayBle>();
-					data.setScope(null);
+					Data<ArrayBle> data = new Data<ArrayBle>(false);
+					data.setScope(0);
 					data.setValue(arr);
 					memory.put(f, data);
                                         returnValue = (String) "Array Initialized";
 				}else if(params.length == 2) {
                                         System.out.println("Array2D Initialization . . .");
                                         ArrayBle[][] arr2d = new ArrayBle[Integer.parseInt(params[0])][Integer.parseInt(params[1])];
-                                        Data<ArrayBle[][]> data2d = new Data<ArrayBle[][]>();
-                                        data2d.setScope(null);
+                                        Data<ArrayBle[][]> data2d = new Data<ArrayBle[][]>(false);
+                                        data2d.setScope(0);
                                         data2d.setValue(arr2d);
                                         memory.put(f, data2d);
                                         returnValue = (String) "Array2D Initialized";
@@ -212,7 +212,7 @@ public class ArraysFunct {
 		int returnValue = -1;
 		Data<ArrayBle> data = (Data<ArrayBle>) memory.get(params[0]);
 		if(data == null){
-                    data = new Data<ArrayBle>();
+                    data = new Data<ArrayBle>(false);
                 }
                 ArrayBle array = (ArrayBle) data.getValue();
                 if(array == null){
@@ -221,7 +221,7 @@ public class ArraysFunct {
                 
 		Data<Object> x = (Data<Object>) memory.get(arrName);
                 if(x == null){
-                    x = new Data<>();
+                    x = new Data<>(false);
                 } 
                 if(!array.search(params[1]).equals(-1)){
                     x.setValue("true");
@@ -261,7 +261,7 @@ public class ArraysFunct {
                 //if(memory.get(params[0]).getClass() == "ArrayBle"){
                 Data<ArrayBle> data = (Data<ArrayBle>) memory.get(params[0]);
                 if(data == null){
-                    data = new Data<ArrayBle>();
+                    data = new Data<ArrayBle>(false);
                 }
                 ArrayBle array = (ArrayBle) data.getValue();
                 if(array == null){
@@ -290,7 +290,7 @@ public class ArraysFunct {
 		
                 Data<ArrayBle> data = (Data<ArrayBle>) memory.get(params[0]);
 		if(data == null){
-                    data = new Data<ArrayBle>();
+                    data = new Data<ArrayBle>(false);
                 }
                 ArrayBle array = (ArrayBle) data.getValue();
                 if(array == null){
@@ -305,8 +305,8 @@ public class ArraysFunct {
 		} else if (params.length >= 3) {
                     if(params.length == 4){ 
                         //if(params[2].getClass().getName().equalsIgnoreCase("String")){
-                        key = params[2];
-                        pos = Integer.parseInt(params[3]);
+                        //key = params[2];
+                        //pos = Integer.parseInt(params[3]);
                     }else if(params.length == 3){
                         //System.out.println("Type: "+params[2].getClass().getName());
                         try {
@@ -335,7 +335,7 @@ public class ArraysFunct {
 		//ArrayBle array = (ArrayBle) memory.get(params[0]);
 		Data<ArrayBle> data = (Data<ArrayBle>) memory.get(params[0]);
 		if(data == null){
-                    data = new Data<ArrayBle>();
+                    data = new Data<ArrayBle>(false);
                 }
                 ArrayBle array = (ArrayBle) data.getValue();
                 if(array == null){
@@ -344,7 +344,7 @@ public class ArraysFunct {
                 
                 Data<Object> x = (Data<Object>) memory.get(arrName);
                 if(x == null){
-                    x = new Data<>();
+                    x = new Data<>(false);
                 }
                 
                 //Object y = (Object) x.getValue();

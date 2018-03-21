@@ -58,7 +58,7 @@ public class ArrayBle {
 		}
 		
 		return i;
-	}
+	}   
 	
 	public Object delete(Object value) {
 		Object ret = "ERROR: value not found, array returned -1";
@@ -83,4 +83,5 @@ public class ArrayBle {
 		//if(l.lastIndexOf(value) > position){
                 l.add(position, e);     
 	}
+        
 }

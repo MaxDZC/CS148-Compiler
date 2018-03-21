@@ -121,7 +121,7 @@ public class DataTypes {
 		if(val.matches(intExp)){
 			
 			int res = Integer.parseInt(val);
-			Data<Integer> valu = new Data<Integer>();
+			Data<Integer> valu = new Data<Integer>(false);
 			valu.setValue(res);
 			
 			allVars.put(name, valu);
@@ -129,7 +129,7 @@ public class DataTypes {
 		}else if(val.matches(stringExp)){
 			
 			val = val.replaceAll(stringExp, "$1");
-			Data<String> valu = new Data<String>();
+			Data<String> valu = new Data<String>(false);
 			valu.setValue(val);
 			allVars.put(name, valu);
 			
@@ -137,7 +137,7 @@ public class DataTypes {
 			//val = val.replaceAll(floatExp, "$1");
 			
 			float res = Float.parseFloat(val);
-			Data<Float> valu = new Data<Float>();
+			Data<Float> valu = new Data<Float>(false);
 			valu.setValue(res);
 			allVars.put(name, valu);
 			
