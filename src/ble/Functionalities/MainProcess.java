@@ -30,13 +30,14 @@ public class MainProcess {
     public static String process(String line) throws ScriptException, IOException {
         String status;
         
-        status = "Ok";
+        status = "Syntax Error on this Line!!!";
         
         p = Pattern.compile(REPEAT);
         m = p.matcher(line);
 
         if(m.find()) {
             Loops.repeat(line);
+            status = "Syntax Correct";
         }
         
         p = Pattern.compile(FORLOOP);
@@ -44,6 +45,7 @@ public class MainProcess {
         
         if(m.find()) {
             Loops.forLoop(line);
+            status = "Syntax Correct";
         }
 
         p = Pattern.compile(COOKIES);
@@ -51,6 +53,7 @@ public class MainProcess {
 
         if(m.find()) {
             status = Cookies.cookies(line);
+            status = "Syntax Correct";
         }
         
         p = Pattern.compile(DISPLAY);
@@ -58,6 +61,7 @@ public class MainProcess {
         
         if(m.find()) {
             Display.run(line);
+            status = "Syntax Correct";
         }
         
         p = Pattern.compile(VALIDATION);
@@ -65,6 +69,7 @@ public class MainProcess {
         
         if(m.find()) {
             ValidationFunct.run(line);
+            status = "Syntax Correct";
         }
         
         p = Pattern.compile(CONDITIONAL);
@@ -73,6 +78,7 @@ public class MainProcess {
         if(m.find()) {
             Condi cond = new Condi();
             cond.evalStatement(line);
+            status = "Syntax Correct";
         }
         
         p = Pattern.compile(DB);
@@ -80,6 +86,7 @@ public class MainProcess {
         
         if(m.find()) {
             Database.test(line);
+            status = "Syntax Correct";
         }
         
         p = Pattern.compile(TIME_LIB);
@@ -88,6 +95,7 @@ public class MainProcess {
         if(m.find()) {
             TimeLibraryModel t1 = new TimeLibraryModel();
             t1.checkTimeFunctionality(line);
+            status = "Syntax Correct";
         }
         
         p = Pattern.compile(Queue_stack.getQueue());
@@ -95,6 +103,7 @@ public class MainProcess {
         
         if(m.find()) {
             Queue1.declareQueue(qu, line);
+            status = "Syntax Correct";
         }  
         
         p = Pattern.compile(Queue_stack.getStack());
@@ -102,6 +111,7 @@ public class MainProcess {
         
         if(m.find()) {
             Stack1.declareStack(st, line);
+            status = "Syntax Correct";
         }
         
         p = Pattern.compile(ARRAYS);
@@ -109,6 +119,7 @@ public class MainProcess {
         
         if(m.find()) {
             ArraysFunct.arrayStuff(line);
+            status = "Syntax Correct";
         }
         
         return status;
