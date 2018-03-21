@@ -2,11 +2,17 @@ package ble;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import javax.script.ScriptException;
 
+import ble.Functionalities.DataTypes;
+import ble.Functionalities.MainProcess;
 import ble.Network.Network;
 import ble.Network.Http.Server;
+import ble.SyntaxAnalyzer.Comments;
 import ble.SyntaxAnalyzer.SyntaxAnalyzer;
 
 /**
@@ -18,6 +24,8 @@ public class BleDriver {
     protected Network network = null;
     
     static SyntaxAnalyzer sa = new SyntaxAnalyzer();
+    private static MainProcess mp = new MainProcess();
+    private static ble.SyntaxAnalyzer.DataTypes dt = new ble.SyntaxAnalyzer.DataTypes();
     //Temporary for reading every .ble file for http upload to browser
     private static final File CONSTANT_FOLDER = new File("bledocs/");
     private static final File[] CONSTANT_LISTOFFILES = CONSTANT_FOLDER.listFiles();
@@ -43,7 +51,7 @@ public class BleDriver {
         String[] lines;
         int i;
        
-        /*
+        
         bleCode = new String(Files.readAllBytes(Paths.get("helloworld.ble")), StandardCharsets.UTF_8);
         
         if(sa.analyze(bleCode)) {
@@ -55,13 +63,12 @@ public class BleDriver {
             lines = bleCode.split(System.getProperty("line.separator"));
             
             for(i = 0; i < lines.length; i++) {
-                MainProcess.process(lines[i]);
+				MainProcess.process(lines,i,dt);
             }
             
         } else {
             System.out.println("Syntax Error");
         }
-        */
         
         //Assume output processed from special task no. 2...
         //Testing Display...
