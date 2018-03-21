@@ -9,12 +9,13 @@
   	<div class="container">
 	  	<div class="row" style="margin-top: 10%;">	
 		<div class="col-md-4 col-md-offset-4">
-			<img src="././assets/img/loginBanner.png" align="middle">	
+			<img src="../../assets/img/loginBanner.PNG" align="middle">	
 		</div>
 		</div>
 
 		<div class="row">
-			<form method="POST">
+			<!-- TODO: UNCOMMENT AFTER IMPLEMENTING POST METHOD -->
+			<!-- <form method="POST">  -->
 				<div class="col-md-2 col-md-offset-5">	
 					<div class="form-group">	
 							<label>Username</label>
@@ -26,14 +27,19 @@
 					</div>
 					<div class="form-group" style="text-align: center;">
 							<br>
-							<button type="submit" class="btn" name="submit">Login</button>	
+							<!-- TODO: UNCOMMENT AFTER IMPLEMENTING POST METHOD -->
+							<!-- <button type="submit" class="btn" name="submit" >Login</button> -->
+							<button onClick ="redirPageForStudent()" class="btn btn-default" name="submit" >Login</button>
+							<!-- <button onClick ="redirPageForTeacher()" class="btn" name="submit" >Login</button> -->
 					</div>
 					<div class="form-group">
 						<br>
-						<a href="..\..\components\signup\signup.html">Don't have an account?</a>
+						<a href="..\signup\signup.html">Don't have an account?</a>
 					</div>
 				</div>
-			</form>
+			<!-- </form> -->
 		</div>
 	</div>
-  </body>
+	</body>
+	<script src= "../../js/login.js"></script>
+</html>

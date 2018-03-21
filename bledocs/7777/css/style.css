@@ -3,6 +3,7 @@
 */
 
 body{
+
   color: #000;
   font-family: Segoe UI;
   font-size: 1.5em;
@@ -37,6 +38,11 @@ h1{
   padding: 1em 0.25em !important;
   width: 100%;
   border: 1px solid #D1D2D4;
+}
+
+.card__holder:hover{
+  background-color: #D1D2D4;
+  border: 1px solid #2E3192;
 }
 
 .card__byline--by{

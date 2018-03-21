@@ -3,7 +3,7 @@
 */
 
 body{
-  color: #000;
+  color: #000000;
   font-family: Segoe UI;
   font-size: 1.5em;
 }
@@ -18,6 +18,53 @@ h1{
   font-size: 3em;
   font-style: italic;
 }
+
+/* container to prevent Your Announcement cards from breaking */
+.announcementCont{
+  margin-left: 13%;
+  width: 73%;
+}
+
+
+
+
+/*
+    BUTTON STYLES
+*/
+
+/*Fixes radio overlapping label issue*/
+.radioIn{
+  width: auto;
+}
+
+.btn.btn-default{
+  border: 1px solid #2E3192 !important;
+  background-color: white !important;
+  border-radius:0;
+}
+
+.btn.btn-default:hover{
+  background-color: #2E3192 !important;
+  font-family: Segoe UI Semibold;
+  color: white !important;
+}
+
+.btn.btn-cancel{
+  border: none;
+  font-family: Segoe UI Semibold;
+  background-color: white;
+  color: #2E3192 !important;
+}
+
+.btn.btn-cancel:hover{
+  text-decoration: underline;
+}
+
+
+.titleText{
+  width: 50%;
+}
+
 
 /*
     PAGE STYLES
@@ -37,6 +84,11 @@ h1{
   padding: 1em 0.25em !important;
   width: 100%;
   border: 1px solid #D1D2D4;
+}
+
+.card__holder:hover{
+  background-color: #D1D2D4;
+  border: 1px solid #2E3192;
 }
 
 .card__byline--by{
@@ -82,8 +134,11 @@ h1{
   content: "";
   position: absolute;
   display: none;
+  
 }
-
+.checkboxIn{
+  width:auto;
+}
 /* Show the checkmark when checked */
 .checkbox-cont input:checked ~ .checkmark:after {
   display: block;
@@ -102,20 +157,3 @@ h1{
   transform: rotate(45deg);
 }
 /*checkbox in subscriptions portion END*/
-
-/*save and cancel btn*/
-.btnsub{
-    background-color: white;
-    border: 0;
-    margin-right: 20px;
-    padding: 5px 30px 5px 30px;
-}
-
-.btnsub:hover{
-    background-color: #2E3192;
-}
-
-.btnsub a:hover{
-    color: white;
-    text-decoration: none;
-}
