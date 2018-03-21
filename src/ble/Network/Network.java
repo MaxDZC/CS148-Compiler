@@ -1,6 +1,6 @@
-package Ble.Network;
+package ble.Network;
 
-import Ble.Network.Http.Server;
+import ble.Network.Http.Server;
 import java.util.HashMap;
 
 public class Network {

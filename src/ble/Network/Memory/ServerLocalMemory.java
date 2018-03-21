@@ -1,6 +1,6 @@
-package Ble.Network.Memory;
+package ble.Network.Memory;
 
-import Ble.Network.Memory.Memory;
+import ble.Network.Memory.Memory;
 
 public class ServerLocalMemory extends Memory {
 

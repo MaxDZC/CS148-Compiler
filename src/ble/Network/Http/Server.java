@@ -1,4 +1,4 @@
-package Ble.Network.Http;
+package ble.Network.Http;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +14,8 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import Ble.Network.Memory.ServerMemory;
-import Ble.Network.Storage.FileDirectory;
+import ble.Network.Memory.ServerMemory;
+import ble.Network.Storage.FileDirectory;
 import com.sun.net.httpserver.Headers;
 import java.io.InputStream;
 import java.net.HttpURLConnection;

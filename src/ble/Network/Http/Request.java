@@ -1,4 +1,4 @@
-package Ble.Network.Http;
+package ble.Network.Http;
 
 import com.sun.net.httpserver.HttpExchange;
 import java.io.UnsupportedEncodingException;

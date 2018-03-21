@@ -1,4 +1,4 @@
-package Ble.Network.Memory;
+package ble.Network.Memory;
 
 public class MemoryItem {
 

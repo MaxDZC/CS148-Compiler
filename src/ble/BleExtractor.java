@@ -33,13 +33,6 @@ public class BleExtractor {
 		
 		
 		Pattern p = Pattern.compile(regex);
-<<<<<<< HEAD
-		
-		Matcher m = p.matcher(temp);
-		
-		m.find();
-		
-=======
 		Matcher m = p.matcher(temp);
 		//String filename = file.getName();
 		
@@ -51,8 +44,6 @@ public class BleExtractor {
 		
 		//writer.close();
 		reader.close();
->>>>>>> origin/announcements
-		
 		return m.group();
 	}
 }
