@@ -1,6 +1,7 @@
 
 package ble;
 
+<<<<<<< HEAD
 
 import ble.Functionalities.MDASFunc;
 import ble.Functionalities.MainProcess;
@@ -11,6 +12,11 @@ import ble.injector.ImbedHtml;
 import ble.objects.ArrayBle;
 import java.util.Arrays;
 import java.io.BufferedReader;
+=======
+// import ble.Http.Server;
+import ble.SyntaxAnalyzer.*;
+import ble.injector.Display;
+>>>>>>> origin/announcements
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,6 +28,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.script.ScriptException;
 
+import Ble.Network.Network;
+import Ble.Network.Http.Server;
+
 /**
  *
  * @author Max
@@ -29,6 +38,9 @@ import javax.script.ScriptException;
 
 
 public class BleDriver {
+    
+    protected Network network = null;
+    
     static SyntaxAnalyzer sa = new SyntaxAnalyzer();
     //Temporary for reading every .ble file for http upload to browser
     private static final File CONSTANT_FOLDER = new File("bledocs/");
@@ -38,13 +50,33 @@ public class BleDriver {
     public BleDriver() {
     }
     
+    
+    
     public static void main(String[] args) throws IOException, ScriptException, Exception {
+<<<<<<< HEAD
     	ble.SyntaxAnalyzer.DataTypes data = new DataTypes();
         //data.allVars.
     	SyntaxAnalyzer syn = new SyntaxAnalyzer();
     	MainProcess mp = new MainProcess();
     	
     	String bleCode, temp;
+=======
+        BleDriver driver = new BleDriver();
+        
+           Server server = null;
+        
+        server = driver.network().createServer(8080);
+        server.start();
+        
+        server = driver.network().createServer(9999);
+        server.start();
+        
+        server = driver.network().createServer(7777);
+        server.start();
+        
+        
+        String bleCode, temp;
+>>>>>>> origin/announcements
         String[] lines;
         int i;
        
@@ -74,11 +106,30 @@ public class BleDriver {
         
         
         //Assume output processed from special task no. 2...
+<<<<<<< HEAD
+=======
+        //Testing Display...
+        /*
+            bleCode = new String(Files.readAllBytes(Paths.get("bledocs/9999/testing.ble")), StandardCharsets.UTF_8);
+            String[] results = new String[2];
+            
+            results[0] = "varX = 10";
+            results[1] = "varY = 20";
+>>>>>>> origin/announcements
         
+            Display displaySample = new Display(bleCode, results);
+            displaySample.display();
+            
+        return;
+        */
         //Assume files come from http request or socket...
+<<<<<<< HEAD
         int ctr = 80;
         String status;
         
+=======
+        /* int ctr = 8080;
+>>>>>>> origin/announcements
         for (File file : CONSTANT_LISTOFFILES) {
                 if (file.isFile()) {
                     System.out.println("...Preparing files for browser upload");
@@ -121,6 +172,7 @@ public class BleDriver {
                         ctr++;
 	                }
                 }
+<<<<<<< HEAD
         
         }
         
@@ -139,3 +191,16 @@ public class BleDriver {
     }
 
 }
+=======
+        } */
+    }
+    
+    public BleDriver() {
+        this.network = new Network();
+    }
+    
+    public Network network() {
+        return this.network;
+    }
+}
+>>>>>>> origin/announcements

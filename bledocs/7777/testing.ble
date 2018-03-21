@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Test</title>
+	</head>
+	<@BLE
+		let varX = {{ BLE.ADD_1 }} + {{ BLE.ADD_2 }};
+	@>
+	<body>
+		<h1>Select 10 or 20</h1>
+		<form action = "testing" method="GET">
+			<input name = "add_1" type = "text">
+			<input name = "add_2" type = "text">
+			<input type = "text" value = "<@BLE varX @>" readonly>
+			<button type="submit">Add</button>
+		</form>
+
+	</body>
+</html>

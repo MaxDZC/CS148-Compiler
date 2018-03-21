@@ -6,6 +6,7 @@
 	<body>
 
 		<@BLE
+<<<<<<< HEAD
 			let arr = Array()
 			insert(arr, 1)
 			insert(arr, 'val', 'key')
@@ -18,5 +19,19 @@
 			let x = retrieve(arr, 3)
 		<h1><@BLE x @></h1>
 
+=======
+
+			Let varX = 10
+			Let varY = 20
+
+		@>
+		<h1>Select 10 or 20</h1>
+
+		<select>
+			<option value=<@BLE display(varX) @>>10</option>
+			<option value=<@BLE display(varY) @>>20</option>
+		</select>
+		<div><@BLE display(varX) @></div>
+>>>>>>> origin/announcements
 	</body>
 </html>

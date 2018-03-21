@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Post Announcement</title>
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/css/style.css" rel="stylesheet">
+  </head>	
+  <body>
+		<div class ="container">
+			<div class ="row">
+				<div class ="col col-offset-1 col-md-11">
+				<form method="POST">
+				
+					<h1>Post an announcement</h1>
+					
+						<div class="form-group">
+							<label>Title</label><br>
+							<input class ="titleText" type="text">
+						</div>
+
+						<div class="form-group">
+							<label>Message</label><br>
+							<textarea rows="10" cols="99"></textarea>
+						</div>
+						<div><h4>Visibility</h4></div>
+						<div class="radio-inline">
+							<label><input class ="radioIn" type="radio" name="optradio">For subscribers only</span></label>
+						</div>
+						<div class="radio-inline">
+							<label><input class ="radioIn" type="radio" name="optradio"><span class ="radLabel">For everyone</span></label>
+						</div>
+
+						<div class="form-group">
+							<button type="submit" class="btn btn-default" style="text-align: center;">Post</button>
+							<a href="javascript:history.back()" class = "btn btn-cancel">Cancel</a>
+						</div>
+				</form>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script src="../../js/jquery-3.3.1.min.js"></script>
+	<script src ="../../js/bootstrap.min.js"></script>
+ </html>

@@ -1,0 +1,3 @@
+<form action = "hello.ble">
+    <input type="submit">
+</form>

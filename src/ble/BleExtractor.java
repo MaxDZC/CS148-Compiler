@@ -33,11 +33,25 @@ public class BleExtractor {
 		
 		
 		Pattern p = Pattern.compile(regex);
+<<<<<<< HEAD
 		
 		Matcher m = p.matcher(temp);
 		
 		m.find();
 		
+=======
+		Matcher m = p.matcher(temp);
+		//String filename = file.getName();
+		
+		
+		//BufferedWriter writer = new BufferedWriter(new FileWriter(new File("bledocs/extracted_"+filename)));
+		m.find();
+		//writer.write(m.group());
+		//System.out.println(m.group());
+		
+		//writer.close();
+		reader.close();
+>>>>>>> origin/announcements
 		
 		return m.group();
 	}
