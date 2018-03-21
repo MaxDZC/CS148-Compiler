@@ -1,28 +1,38 @@
-<div class="row">
-	<div class="col-md-8">
-		<form method="POST">
-			<h1>Post an announcement</h1>
-			
-			<div class="form-group col-md-8">
-				<label>Title</label>
-				<input type="text">
-			</div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Post Announcement</title>
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/css/style.css" rel="stylesheet">
+  </head>	
+  <body>
+	<div class="row">
+		<div class="col-md-8">
+			<form method="POST">
+				<h1>Post an announcement</h1>
+				
+				<div class="form-group col-md-8">
+					<label>Title</label>
+					<input type="text">
+				</div>
 
-			<div class="form-group col-md-8">
-				<label>Message</label><br>
-				<textarea rows="10" cols="99"></textarea>
-			</div>
+				<div class="form-group col-md-8">
+					<label>Message</label><br>
+					<textarea rows="10" cols="99"></textarea>
+				</div>
 
-			<div class="form-group col-md-8">
-				<label>Visibility</label><br>
-				<input type="radio" class="radio" value="subscribed"> To subscribed users only
-				<input type="radio" class="radio" value="everyone"> To everyone
-			</div>
+				<div class="form-group col-md-8">
+					<label>Visibility</label><br>
+					<input type="radio" class="radio" value="subscribed"> To subscribed users only
+					<input type="radio" class="radio" value="everyone"> To everyone
+				</div>
 
-			<div class="form-group col-md-8">
-				<button type="submit" class="col-md-1" style="text-align: center;">Post</button>
-				<a href="javascript:history.back()" class="col-md-1">Cancel</a>
-			</div>
-		</form>
+				<div class="form-group col-md-8">
+					<button type="submit" class="col-md-1" style="text-align: center;">Post</button>
+					<a href="javascript:history.back()" class="col-md-1">Cancel</a>
+				</div>
+			</form>
+		</div>
 	</div>
-</div>
+  </body>
+ </html>

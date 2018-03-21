@@ -1,22 +1,92 @@
 <!DOCTYPE html>
-<html ng-app="compiler">
+<html>
   <head>
     <title>Announcements</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <script src="js/angular.min.js"></script>
-    <script src="js/angular-route.min.js"></script>
-    <script src="js/app.js"></script>
-    <script src="components/login/login.app.js"></script>
-    <script src="components/signup/signup.app.js"></script>
-    <script src="components/postAnnouncement/postAnnouncement.app.js"></script>
-    <script src="components/announcements/announcements.app.js"></script>
-    <script src="components/announcements/viewAnnouncements.app.js"></script>
   </head>
 
   <body>
-    <div class="row" ng-view>
+    
+    
+      <div class="row">
+        <div class="col col-md-offset-1 col-md-3">
+          <h1>
+            Announcements
+          </h1>
+        </div>
+      </div>
 
-    </div>
+      <div class="row">
+        <div class="col col-md-offset-1 col-md-2">
+          <div>
+              Filter by:
+          </div>
+          <select>
+            <option>None</option>
+            <option>Subscribed teachers</option>
+          </select>
+        </div>
+
+        <div class="col col-md-8">
+          <div class="page__date-separator">
+            Today
+          </div>
+          <div class="row card__holder">
+            <div class="card__byline col-md-12 col-sm-12 col-xs-12">
+              <span class="card__byline--by">by</span>
+              <span class="card__byline--name">Principal Seymour Skinner</span>
+            </div>
+            <div class="card__button-holder">
+              <div>Hide</div>
+              <div><a href="\components\announcements\viewAnnouncements.html">View announcement</a></div>
+            </div>
+            <div class="card__title col-md-9 col-sm-12 col-xs-12">
+              No classes for Today, March 2
+            </div>
+            <div class="card__message-preview col-md-9 col-sm-12 col-xs-12">
+              Due to the heavy snowfall that has barricaded the entrances of our school,
+              classes will have to be cancelled today.
+            </div>
+          </div>
+          <div class="page__date-separator">
+            TUESDAY, FEBRUARY 29
+          </div>
+          <div class="row card__holder">
+            <div class="card__byline col-md-12 col-sm-12 col-xs-12">
+              <span class="card__byline--by">by</span>
+              <span class="card__byline--name">Principal Seymour Skinner</span>
+            </div>
+            <div class="card__button-holder">
+              <div>Hide</div>
+              <div><a href="\components\announcements\viewAnnouncements.html">View announcement</a></div>
+            </div>
+            <div class="card__title col-md-9 col-sm-12 col-xs-12">
+              No classes for Today, March 2
+            </div>
+            <div class="card__message-preview col-md-9 col-sm-12 col-xs-12">
+              Due to the heavy snowfall that has barricaded the entrances of our school,
+              classes will have to be cancelled today.
+            </div>
+          </div>
+          <div class="row card__holder">
+            <div class="card__byline col-md-12 col-sm-12 col-xs-12">
+              <span class="card__byline--by">by</span>
+              <span class="card__byline--name">Principal Seymour Skinner</span>
+            </div>
+            <div class="card__button-holder">
+              <div>Hide</div>
+              <div><a href="\components\announcements\viewAnnouncements.html">View announcement</a></div>
+            </div>
+            <div class="card__title col-md-9 col-sm-12 col-xs-12">
+              No classes for Today, March 2
+            </div>
+            <div class="card__message-preview col-md-9 col-sm-12 col-xs-12">
+              Due to the heavy snowfall that has barricaded the entrances of our school,
+              classes will have to be cancelled today.
+            </div>
+          </div>
+      </div>
+    
   </body>
 </html>
