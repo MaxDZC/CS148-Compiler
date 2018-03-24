@@ -6,11 +6,11 @@ import java.util.regex.Pattern;
 
 public class SyntaxAnalyzer {
     /* Syntax */
-    public final static String DISPLAY = "display[(]\\s*((\".+\"|\'.+\'|\\d+(\\.\\d+)?|[a-zA-Z]\\w*)(\\s*[+]\\s*(\".+\"|\'.+\'|\\d+(\\.\\d+)?|[a-zA-Z]\\w*))*)?\\s*[)]\\s*";
+    public final static String DISPLAY = "\\s*display[(]\\s*((\".+\"|\'.+\'|\\d+(\\.\\d+)?|[a-zA-Z]\\w*)(\\s*[+]\\s*(\".+\"|\'.+\'|\\d+(\\.\\d+)?|[a-zA-Z]\\w*))*)?\\s*[)]\\s*";
     public final static String COOKIES = "(setCookie\\(\\s*\"\\w+\"\\s*,\\s*\\d+\\)|getCookie\\(\\s*\"\\w+\"\\s*\\))";
     private final static String SESSIONS = "(setSession\\(\\s*\"\\w+\"\\s*,\\s*\\d+\\)|getSession\\(\\s*\"\\w+\"\\s*\\))";
     private final static String FETCH = "fetch\\(\\s*\"(?i)(get|post)\"\\s*,\\s*\"\\w+\"\\s*\\)";
-    private final static String DATATYPES = DataTypes.getSyntax();
+    public final static String DATATYPES = DataTypes.getSyntax();
     public final static String VALIDATION = Validation.getValidation();
     private final static String FUNCTIONS = Functions.getFunctionRegex();
     public final static String ARRAYS = Arrays.getArrayPattern();

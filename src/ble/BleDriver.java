@@ -2,6 +2,7 @@
 package ble;
 
 
+import ble.Functionalities.Display;
 import ble.Functionalities.MDASFunc;
 import ble.Functionalities.MainProcess;
 import ble.Http.Server;
@@ -76,8 +77,8 @@ public class BleDriver {
         //Assume output processed from special task no. 2...
         
         //Assume files come from http request or socket...
-        int ctr = 80;
-        String status;
+        int ctr = 1025;
+        String status = "";
         
         for (File file : CONSTANT_LISTOFFILES) {
                 if (file.isFile()) {
@@ -87,26 +88,28 @@ public class BleDriver {
                     String[] results;
                     String result = extractor.extractBle(file);
                     
-                    System.out.println(result);
+                    System.out.println("result" + result);
 
                     if(syn.analyze(result)) {
                         System.out.println("Analyzed!!!");
                         String[] lines1 = result.split("\\n");
-                        
+                      System.out.println("resultttt" + result);
                         for(int i1 = 0 ; i1 < lines1.length; i1++) {
                             String line = lines1[i1];
                         	if(!line.trim().equals("")) {
                         		resultGet.add(line);
                                 System.out.println("Line :"+line);
-                                resultGet.add(line);
+                                //resultGet.add(line);
                                 status = MainProcess.process(lines1,i1, data);
                             }
                         }
+                        System.out.println("RESULT" + result);
 	                    //results[0] = "varX = "+" "+MDASFunc.evalExp(result);
 
                         results = resultGet.toArray(new String[0]);
-
-                        ImbedHtml injectResult = new ImbedHtml(bleCode, results);
+                        
+                        System.out.println("***BLECODE"+bleCode);
+                        ImbedHtml injectResult = new ImbedHtml(bleCode, results); // from ble to  html code 
                         Server server = new Server();
 
                         System.out.println("File: "+file.getName());
@@ -114,19 +117,20 @@ public class BleDriver {
                         server.setContext(file.getName());
                         server.setResponse(injectResult.getHtmlCode());
 						
-                        server.setSocketNo(82);
+                        server.setSocketNo(1026);
                         System.out.println("Located at: localhost:"+server.getSocketNo()+server.getContext());
-
-                        //Server.server(null);
+                        Server.server(null);
+                       // Server.server(status);
                         ctr++;
 	                }
                 }
         
         }
         
-        Data<ArrayBle> arr = (Data<ArrayBle>) data.vars.get("arr");
+        
+       /* Data<ArrayBle> arr = (Data<ArrayBle>) data.vars.get("arr");
         ArrayBle array = (ArrayBle) arr.getValue();
-        //System.out.println("Array arr = "+array);
+        System.out.println("Array arr = "+array);
         for(i=0; i<array.size(); i++){
             System.out.println("Index "+i+": "+array.get(i));
         }
@@ -134,8 +138,10 @@ public class BleDriver {
         Data<Object> x = (Data<Object>)data.vars.get("x");
         System.out.println("X value: "+x.getValue());
         Data<Object> stat = (Data<Object>)data.vars.get("stat");
-        System.out.println("Stat value: "+stat.getValue());
+        System.out.println("Stat value: "+stat.getValue()); */
                         
     }
+    
+    
 
 }

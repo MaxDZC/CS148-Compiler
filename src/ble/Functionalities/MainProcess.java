@@ -11,12 +11,14 @@ import static ble.SyntaxAnalyzer.SyntaxAnalyzer.FORLOOP;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.REPEAT;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.TIME_LIB;
 import static ble.SyntaxAnalyzer.SyntaxAnalyzer.VALIDATION;
+import static ble.SyntaxAnalyzer.SyntaxAnalyzer.DATATYPES;
 import java.io.IOException;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.script.ScriptException;
+import ble.SyntaxAnalyzer.DataTypes; 
 
 /**
  *
@@ -32,7 +34,17 @@ public class MainProcess {
         String status;
 
         status = "Ok";
-
+        
+        p = Pattern.compile(DATATYPES);
+        m = p.matcher(line[idx]);
+        if(m.find()){
+            DataTypes dTypes = new DataTypes(); 
+            dTypes.storeVar(line[idx]);
+            System.out.println("DECLARED MAYBE");
+            dTypes.printAllVars(); 
+        
+        }
+        
         p = Pattern.compile(REPEAT);
         m = p.matcher(line[idx]);
 
@@ -64,7 +76,7 @@ public class MainProcess {
         m = p.matcher(line[idx]);
 
         if(m.find()) {
-            Display.run(line[idx]);
+          //  Display.run(line[idx]);
         }else if (!m.find()){
             System.out.println("Syntax Error on display function");
         }

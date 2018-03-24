@@ -9,6 +9,7 @@ import ble.SyntaxAnalyzer.*;
 import ble.entities.Entity;
 import ble.entities.EntityVariable;
 import ble.Storage.BleStorage;
+import ble.SyntaxAnalyzer.DataTypes; 
 
 public class BleSyntaxChecker {
 	private Matcher m;
@@ -17,6 +18,7 @@ public class BleSyntaxChecker {
 	public boolean syntaxCheck(String line, BleStorage storage) {
 		String name = null;
 		boolean cond = false;
+                
 		//checks if array
 		p = Pattern.compile(Arrays.getArrayPattern());
 		m = p.matcher(line);

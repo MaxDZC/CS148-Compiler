@@ -11,11 +11,11 @@ public class DataTypes<T> {
     public static void storeVar(String toCheck) throws IOException
     {
         String varName, value;
-        String letVar = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
-        String letVarVal = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*)\"|-?\\d+(\\.?\\d+|))+\\s*[\r\n]";
-        String varVal = "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*\")|([+-]?([0-9]*[.])?[0-9]+))\\s*[\r\n]";
-        String letVarVar = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
-        String varVar = "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
+        String letVar = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*";
+        String letVarVal = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*)\"|-?\\d+(\\.?\\d+|))+\\s*";
+        String varVal = "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*\")|([+-]?([0-9]*[.])?[0-9]+))\\s*";
+        String letVarVar = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*([a-z|A-Z]+\\w*)\\s*";
+        String varVar = "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*([a-z|A-Z]+\\w*)\\s*";
         System.out.println("\n***statement:\n" + toCheck);
         
         checkIfNewScope(toCheck);
@@ -118,12 +118,12 @@ public class DataTypes<T> {
     public static String getSyntax() {
         String syntax;
         
-        syntax = "(\\s*let\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
+        syntax = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*|";
 
-        syntax += "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*)\"|-?\\d+(\\.?\\d+|))+\\s*[\r\n]";
-        syntax += "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*\")|([+-]?([0-9]*[.])?[0-9]+))\\s*[\r\n]";
-        syntax += "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
-        syntax += "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";
+        syntax += "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*)\"|-?\\d+(\\.?\\d+|))+\\s*|";
+        syntax += "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*\")|([+-]?([0-9]*[.])?[0-9]+))\\s*|";
+        syntax += "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*([a-z|A-Z]+\\w*)\\s*|";
+        syntax += "\\s*([a-z|A-Z]+\\w*)\\s*=\\s*([a-z|A-Z]+\\w*)\\s*";
         
         
         
@@ -136,10 +136,10 @@ public class DataTypes<T> {
     /* stuff */
     private static void varDec(String statement)
     {
-        String letVar = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*[\r\n]";            
+        String letVar = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*";            
             
-        String letVarVal = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*)\"|-?\\d+(\\.?\\d+|))+\\s*[\r\n]";
-        String letVarVar = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(([a-z|A-Z]+\\w*))\\s*[\r\n]";
+        String letVarVal = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(\"?([^\"]*)\"|-?\\d+(\\.?\\d+|))+\\s*";
+        String letVarVar = "\\s*let\\s*([a-z|A-Z]+\\w*)\\s*=\\s*(([a-z|A-Z]+\\w*))\\s*";
 
 
         String varName = statement.replaceAll(letVar, "$1");
@@ -253,5 +253,26 @@ public class DataTypes<T> {
         System.out.println(err);
     
     }
+    
+    public static void printAllVars()
+    {
+        System.out.println("****************************************************");
+        System.out.println("****************** all vars ************************");
+        System.out.println("****************************************************");
+        Set x = vars.keySet();
+        
+
+        for (Object key : x) {
+            String keyS = (String)key; 
+            System.out.println("key: " + keyS + " value: " + 
+                    vars.get(keyS).getValue() + " scope: " + 
+                    vars.get(keyS).getScope());
+        }
+        
+        System.out.println("****************************************************");
+        System.out.println("****************************************************");
+        System.out.println("****************************************************");
+    }
+    
 
 }

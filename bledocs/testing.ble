@@ -6,17 +6,16 @@
 	<body>
 
 		<@BLE
-			let arr = Array()
-			insert(arr, 1)
-			insert(arr, 'val', 'key')
-			insert(arr, 'val2', 'key2', 1)
-			insert(arr, 'val3')
-			
-			delete(arr, 1)
-			
-			let stat = search(arr, 'val')
-			let x = retrieve(arr, 3)
-		<h1><@BLE x @></h1>
+			let y = 1009
+			let z = "hi"
+			display("trial")
+			display(z)
+			display(y)
+			display(nonexisting)
+			@>
+		<h1><@BLE display(y) @><br></h1>
+		<h2><@BLE display(z)@></h2>
 
 	</body>
 </html>
+
